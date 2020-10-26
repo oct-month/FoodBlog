@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>登陆</title>
+    <!-- BootStrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css"
+        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="css/login.css" rel="stylesheet">
+</head>
+
+<body class="text-center">
+    <div  id="loginPop">
+        <div class="alert alert-success" role="alert" v-if="login && login_status">
+            登陆成功
+        </div>
+        <div class="alert alert-danger" role="alert" v-if="login && !login_status">
+            登陆失败，用户名或密码错误
+        </div>
+    </div>
+    <form class="form-signin" action="" method="POST" id="loginForm">
+        <img class="mb-4" src="img/login.jpg" alt="" width="120" height="120">
+        <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
+        <label for="inputUsername" class="sr-only">用户名</label>
+        <input name="username" v-model="username" type="text" id="inputUsername" class="form-control" placeholder="UserName" required autofocus>
+        <label for="inputPassword" class="sr-only">密码</label>
+        <input name="password"  v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <div class="checkbox mb-3">
+            <!-- <label>
+                <input type="checkbox" value="remember-me"> Remember me
+            </label> -->
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <button class="btn btn-lg btn-primary btn-block" onclick="location='/register'">Register</button>
+        <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
+    </form>
+
+    <!-- BootStrap -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
+        integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
+        crossorigin="anonymous"></script>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script>
+        var poPup = new Vue({
+            el: "#loginPop",
+            data: {
+                login: false,       // 是否已有登陆操作
+                login_status: false // 是否登陆成功
+            }
+        })
+        var loginForm = new Vue({
+            el: "#loginForm",
+            data: {
+                username: "",
+                password: ""
+            },
+            methods: {}
+        })
+        // poPup.login = true;
+        // poPup.login_status = true;
+    </script>
+</body>
+
+</html>
