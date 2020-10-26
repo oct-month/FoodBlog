@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
-import cn.ablocker.demo.dao.BlogUserDAO;
+import cn.ablocker.FoodBlog.dao.BlogUserDAO;
 
 @SpringBootTest
 class FoodBlogApplicationTests

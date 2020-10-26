@@ -1,4 +1,4 @@
-package cn.ablocker.demo.dao;
+package cn.ablocker.FoodBlog.dao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -7,7 +7,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
 
-import cn.ablocker.demo.entity.BlogUser;
+import cn.ablocker.FoodBlog.entity.BlogUser;
 
 @Component
 public class BlogUserDAO

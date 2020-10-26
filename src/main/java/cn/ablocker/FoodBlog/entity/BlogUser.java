@@ -1,4 +1,4 @@
-package cn.ablocker.demo.entity;
+package cn.ablocker.FoodBlog.entity;
 
 public class BlogUser
 {
