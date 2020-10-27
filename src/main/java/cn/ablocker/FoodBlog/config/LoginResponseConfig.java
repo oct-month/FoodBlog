@@ -10,7 +10,7 @@ import cn.ablocker.FoodBlog.response.LoginResponse;
 public class LoginResponseConfig
 {
     @Bean
-    @Scope("session")
+    @Scope("prototype")
     public LoginResponse loginSuccessResponse()
     {
         LoginResponse loginResponse = new LoginResponse();
@@ -20,7 +20,7 @@ public class LoginResponseConfig
     }
 
     @Bean
-    @Scope("session")
+    @Scope("prototype")
     public LoginResponse loginFailResponse()
     {
         LoginResponse loginResponse = new LoginResponse();

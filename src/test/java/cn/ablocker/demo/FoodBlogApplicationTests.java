@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 
-import cn.ablocker.FoodBlog.dao.BlogUserDAO;
+import cn.ablocker.FoodBlog.FoodBlogApplication;
 
-@SpringBootTest
+@SpringBootTest(classes = FoodBlogApplication.class)
 class FoodBlogApplicationTests
 {
 	@Autowired
@@ -18,7 +18,6 @@ class FoodBlogApplicationTests
 	@Test
 	void contextLoads()
 	{
-
+		assertNotNull(context);
 	}
-
 }

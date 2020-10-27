@@ -10,7 +10,7 @@ import cn.ablocker.FoodBlog.response.RegisterResponse;
 public class RegisterResponseConfig
 {
     @Bean
-    @Scope("session")
+    @Scope("prototype")
     public RegisterResponse registerSuccessResponse(String userName)
     {
         RegisterResponse registerResponse = new RegisterResponse();
@@ -21,7 +21,7 @@ public class RegisterResponseConfig
     }
 
     @Bean
-    @Scope("session")
+    @Scope("prototype")
     public RegisterResponse registerFailResponse(String userName)
     {
         RegisterResponse registerResponse = new RegisterResponse();

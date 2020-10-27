@@ -1,7 +1,5 @@
 package cn.ablocker.FoodBlog.controller;
 
-import java.io.IOException;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -16,7 +14,7 @@ public class MainController
 {	
 	@LoginNeeded
 	@GetMapping("/")
-	public ModelAndView index(HttpServletRequest request, HttpServletResponse response) throws IOException
+	public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
 	{
 		return new ModelAndView("index.html");
 	}
