@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import cn.ablocker.FoodBlog.annotation.UnLoginNeeded;
-import cn.ablocker.FoodBlog.bussiness.BlogUserBussiness;
+import cn.ablocker.FoodBlog.bussiness.LoginBussiness;
 import cn.ablocker.FoodBlog.entity.BlogUser;
 import cn.ablocker.FoodBlog.response.LoginResponse;
 
@@ -22,20 +22,20 @@ public class LoginController
 	@Autowired
 	private ApplicationContext context;
 	@Autowired
-	private BlogUserBussiness blogUserBussiness;
+	private LoginBussiness loginBussiness;
 	
 	@GetMapping("/login")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
 	{
 		return new ModelAndView("login.html");
 	}
-	
+
 	@UnLoginNeeded
-	@PostMapping("/login")
+	@PostMapping("/api/login")
 	public LoginResponse login(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpServletRequest request, HttpServletResponse response)
 	{
 		String sessionId = request.getSession().getId();
-		BlogUser blogUser = blogUserBussiness.login(userName, passWord, sessionId);
+		BlogUser blogUser = loginBussiness.login(userName, passWord, sessionId);
 		if (blogUser != null)
 			return context.getBean("loginSuccessResponse", LoginResponse.class);
 		else

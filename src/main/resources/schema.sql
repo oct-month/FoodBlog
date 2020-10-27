@@ -4,10 +4,28 @@
 
 -- use FoodBlog;
 
-drop table if exists BlogUser;
+DROP TABLE IF EXISTS WebBlog;
+DROP TABLE IF EXISTS BlogUser;
 
-create table BlogUser(
-	user_name varchar(255) primary key,
-	pass_word varchar(255) not null,
-	email varchar(40) not null
-);
+CREATE TABLE BlogUser (
+	user_name varchar(255) NOT NULL,
+	pass_word varchar(255) NOT NULL,
+	email varchar(40) NOT NULL,
+	CONSTRAINT BlogUser_PK PRIMARY KEY (user_name)
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE WebBlog (
+	id INT auto_increment NOT NULL,
+	user_name varchar(255) NOT NULL,
+	publish_time DATETIME NOT NULL,
+	content TEXT DEFAULT NULL,
+	img MEDIUMBLOB NULL,
+	CONSTRAINT WebBlog_PK PRIMARY KEY (id),
+	CONSTRAINT WebBlog_FK FOREIGN KEY (user_name) REFERENCES BlogUser(user_name) ON DELETE CASCADE ON UPDATE CASCADE
+)
+ENGINE=InnoDB
+DEFAULT CHARSET=utf8mb4
+COLLATE=utf8mb4_general_ci;

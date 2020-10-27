@@ -9,23 +9,25 @@ import cn.ablocker.FoodBlog.response.LoginResponse;
 @Configuration
 public class LoginResponseConfig
 {
+    // 登录成功的响应
     @Bean
     @Scope("prototype")
     public LoginResponse loginSuccessResponse()
     {
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setStatus(201);
-        loginResponse.setSuccess(true);
-        return loginResponse;
+        LoginResponse response = new LoginResponse();
+        response.setStatus(201);
+        response.setSuccess(true);
+        return response;
     }
 
+    // 登陆失败的响应
     @Bean
     @Scope("prototype")
     public LoginResponse loginFailResponse()
     {
-        LoginResponse loginResponse = new LoginResponse();
-        loginResponse.setStatus(403);
-        loginResponse.setSuccess(false);
-        return loginResponse;
+        LoginResponse response = new LoginResponse();
+        response.setStatus(403);
+        response.setSuccess(false);
+        return response;
     }
 }

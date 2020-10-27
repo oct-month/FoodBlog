@@ -11,7 +11,7 @@ import cn.ablocker.FoodBlog.annotation.LoginNeeded;
 
 @RestController
 public class MainController
-{	
+{
 	@LoginNeeded
 	@GetMapping("/")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response)

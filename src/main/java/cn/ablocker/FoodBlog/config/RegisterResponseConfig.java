@@ -9,25 +9,27 @@ import cn.ablocker.FoodBlog.response.RegisterResponse;
 @Configuration
 public class RegisterResponseConfig
 {
+    // 注册成功的响应
     @Bean
     @Scope("prototype")
     public RegisterResponse registerSuccessResponse(String userName)
     {
-        RegisterResponse registerResponse = new RegisterResponse();
-        registerResponse.setStatus(201);
-        registerResponse.setSuccess(true);
-        registerResponse.setUsername(userName);
-        return registerResponse;
+        RegisterResponse response = new RegisterResponse();
+        response.setStatus(201);
+        response.setSuccess(true);
+        response.setUsername(userName);
+        return response;
     }
 
+    // 注册失败的响应
     @Bean
     @Scope("prototype")
     public RegisterResponse registerFailResponse(String userName)
     {
-        RegisterResponse registerResponse = new RegisterResponse();
-        registerResponse.setStatus(403);
-        registerResponse.setSuccess(false);
-        registerResponse.setUsername(userName);
-        return registerResponse;
+        RegisterResponse response = new RegisterResponse();
+        response.setStatus(403);
+        response.setSuccess(false);
+        response.setUsername(userName);
+        return response;
     }
 }

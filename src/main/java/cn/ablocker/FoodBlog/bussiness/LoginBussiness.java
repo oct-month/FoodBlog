@@ -11,13 +11,14 @@ import cn.ablocker.FoodBlog.dao.BlogUserDAO;
 import cn.ablocker.FoodBlog.entity.BlogUser;
 
 @Component
-public class BlogUserBussiness
+public class LoginBussiness
 {
 	@Autowired
 	private BlogUserDAO blogUserDAO;
 	@Autowired
 	private BlogSessionDAO blogSessionDAO;
-	
+
+	// 登录
 	public BlogUser login(String userName, String passWord, String sessionId)
 	{
 		BlogUser blogUser = blogUserDAO.findAnUser(userName, passWord);
@@ -27,12 +28,14 @@ public class BlogUserBussiness
 		}
 		return blogUser;
 	}
-	
+
+	// 下线
 	public void offLine(String sessionId)
 	{
 		blogSessionDAO.remove(sessionId);
 	}
-	
+
+	// 注册
 	public boolean register(BlogUser blogUser)
 	{
 		if (blogUserDAO.addAnUser(blogUser) == 1)
@@ -40,10 +43,17 @@ public class BlogUserBussiness
 		else
 			return false;
 	}
-	
+
+	// 获取用户名
+	public String getUserName(String sessionId)
+	{
+		return blogSessionDAO.get(sessionId);
+	}
+
+	// 查询登录状态
 	public boolean isLogin(String sessionId)
 	{
-		String userName = blogSessionDAO.get(sessionId);
+		String userName = getUserName(sessionId);
 		if (!StringUtils.isEmpty(userName))
 			return true;
 		else
