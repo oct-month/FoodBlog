@@ -21,6 +21,7 @@ CREATE TABLE WebBlog (
 	id INT auto_increment NOT NULL,
 	user_name varchar(255) NOT NULL,
 	publish_time DATETIME NOT NULL,
+	title varchar(255) NULL,
 	content TEXT DEFAULT NULL,
 	img MEDIUMBLOB NULL,
 	CONSTRAINT WebBlog_PK PRIMARY KEY (id),

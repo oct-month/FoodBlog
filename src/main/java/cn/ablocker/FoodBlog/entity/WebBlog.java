@@ -8,6 +8,7 @@ public class WebBlog
     private int id;
     private String userName;        // 关联到BlogUser的用户名
     private Timestamp publishTime;  // 发布博客的时间
+    private String title;           // 标题
     private String content;         // 文字内容
     private Blob img;               // 图片
 
@@ -39,6 +40,16 @@ public class WebBlog
     public void setPublishTime(Timestamp publishTime)
     {
         this.publishTime = publishTime;
+    }
+
+    public String getTitle()
+    {
+        return title;
+    }
+
+    public void setTitle(String title)
+    {
+        this.title = title;
     }
 
     public String getContent()

@@ -47,11 +47,11 @@ public class BlogController
 
     @LoginNeeded
     @PostMapping("/api/add/blog")
-    public BlogsResponse addAnBlog(@RequestParam("content") String content, @RequestParam("img") Blob img, HttpServletRequest request, HttpServletResponse response)
+    public BlogsResponse addAnBlog(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("img") Blob img, HttpServletRequest request, HttpServletResponse response)
     {
         String sessionId = request.getSession().getId();
         String userName = loginBussiness.getUserName(sessionId);
-        WebBlog blog = blogBussiness.addBlog(userName, content, img);
+        WebBlog blog = blogBussiness.addBlog(userName, title, content, img);
         List<WebBlog> blogs = new ArrayList<>();
         blogs.add(blog);
         return (BlogsResponse) context.getBean("blogsResponse", new Object[] {blogs});

@@ -19,9 +19,9 @@ public class WebBlogDAO
 
     public int addAnBlog(WebBlog blog)
     {
-        String sql = "insert into WebBlog(user_name, publish_time, content, img) values(?, ?, ?, ?)";
+        String sql = "insert into WebBlog(user_name, publish_time, title, content, img) values(?, ?, ?, ?, ?)";
         try {
-            return jdbcTemplate.update(sql, blog.getUserName(), blog.getPublishTime(), blog.getContent(), blog.getImg());
+            return jdbcTemplate.update(sql, blog.getUserName(), blog.getPublishTime(), blog.getTitle(), blog.getContent(), blog.getImg());
         }
         catch (DataAccessException e) {
             e.printStackTrace();
@@ -32,14 +32,14 @@ public class WebBlogDAO
     public List<WebBlog> findAllBlogs()
     {
         String sql = "select * from WebBlog";
-        RowMapper<WebBlog> rowMapper = new BeanPropertyRowMapper<>();
+        RowMapper<WebBlog> rowMapper = new BeanPropertyRowMapper<>(WebBlog.class);
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     public List<WebBlog> findUserBlogs(String userName)
     {
         String sql = "select * from WebBlog where user_name=?";
-        RowMapper<WebBlog> rowMapper = new BeanPropertyRowMapper<>();
+        RowMapper<WebBlog> rowMapper = new BeanPropertyRowMapper<>(WebBlog.class);
         return jdbcTemplate.query(sql, rowMapper, userName);
     }
 }

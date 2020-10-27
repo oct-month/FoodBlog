@@ -29,7 +29,7 @@ public class BlogUserDAO
 	public BlogUser findAnUser(String userName, String passWord)
 	{
 		String sql = "select * from BlogUser where user_name=? and pass_word=?";
-		RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<>();
+		RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<>(BlogUser.class);
 		try {
 			return jdbcTemplate.queryForObject(sql, rowMapper, userName, passWord);
 		}

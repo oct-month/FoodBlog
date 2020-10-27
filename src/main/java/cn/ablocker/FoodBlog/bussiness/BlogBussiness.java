@@ -17,23 +17,24 @@ public class BlogBussiness
     private WebBlogDAO webBlogDAO;
 
     // 返回所有博客
-    List<WebBlog> getBlogs()
+    public List<WebBlog> getBlogs()
     {
         return webBlogDAO.findAllBlogs();
     }
 
     // 返回指定用户的所有博客
-    List<WebBlog> getBlogs(String userName)
+    public List<WebBlog> getBlogs(String userName)
     {
         return webBlogDAO.findUserBlogs(userName);
     }
 
     // 增加一篇博客
-    WebBlog addBlog(String userName, String content, Blob img)
+    public WebBlog addBlog(String userName, String title, String content, Blob img)
     {
         WebBlog blog = new WebBlog();
         blog.setUserName(userName);
         blog.setPublishTime(new Timestamp(System.currentTimeMillis()));
+        blog.setTitle(title);
         blog.setContent(content);
         blog.setImg(img);
         if (webBlogDAO.addAnBlog(blog) == 1)
