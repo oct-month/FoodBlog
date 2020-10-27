@@ -31,7 +31,7 @@
                 <input type="checkbox" value="remember-me"> Remember me
             </label> -->
         </div>
-        <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+        <input type="button" class="btn btn-lg btn-primary btn-block" v-on:click="doLogin" value="Sign in">
         <button class="btn btn-lg btn-primary btn-block" onclick="location='/register'">Register</button>
         <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
     </form>
@@ -48,6 +48,9 @@
         crossorigin="anonymous"></script>
     <!-- Vue -->
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 登陆操作 -->
     <script>
         var poPup = new Vue({
             el: "#loginPop",
@@ -62,10 +65,32 @@
                 username: "",
                 password: ""
             },
-            methods: {}
+            methods: {
+                doLogin: ()=> {
+                    if (this.username != "" && this.password != "")
+                    {
+                        axios({
+                            method: "POST",
+                            url: "/login",
+                            params: {
+                                username: this.username,
+                                password: this.password
+                            }
+                        })
+                        .then((response)=> {
+                            poPup.login = true
+                            data = response.data
+                            poPup.login_status = data.success
+                            if (data.success === true)
+                                window.location = "/"
+                        })
+                        .catch((error)=> {
+                            console.log(error)
+                        })
+                    }
+                }
+            }
         })
-        // poPup.login = true;
-        // poPup.login_status = true;
     </script>
 </body>
 

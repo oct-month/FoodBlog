@@ -11,7 +11,7 @@
 </head>
 
 <body class="text-center">
-    <form class="form-register" action="" method="POST">
+    <form id="registerForm" class="form-register" action="" method="POST">
         <img class="mb-4" src="img/register.jpg" alt="" width="120" height="120">
         <div class="form-group" style="text-align:left;">
             <label for="InputUserName">UserName</label>
@@ -25,7 +25,7 @@
             <label for="InputEmail1">Email address</label>
             <input name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" required>
         </div>
-        <button type="submit" class="btn btn-lg btn-primary btn-block">注册</button>
+        <input type="button" class="btn btn-lg btn-primary btn-block" v-on:click="doRegister">注册</button>
     </form>
 
     <!-- BootStrap -->
@@ -38,6 +38,22 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/js/bootstrap.min.js"
         integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI"
         crossorigin="anonymous"></script>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 注册操作 -->
+    <script>
+        var registerForm = new Vue({
+            el: "#registerForm",
+            data: {},
+            methods: {
+                doRegister: ()=> {
+                    // TODO
+                }
+            }
+        })
+    </script>
 </body>
 
 </html>

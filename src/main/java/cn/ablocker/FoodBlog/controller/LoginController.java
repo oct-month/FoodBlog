@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,10 +16,13 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.ablocker.FoodBlog.annotation.UnLoginNeeded;
 import cn.ablocker.FoodBlog.bussiness.BlogUserBussiness;
 import cn.ablocker.FoodBlog.entity.BlogUser;
+import cn.ablocker.FoodBlog.response.LoginResponse;
 
 @RestController
 public class LoginController
 {
+	@Autowired
+	private ApplicationContext context;
 	@Autowired
 	private BlogUserBussiness blogUserBussiness;
 	
@@ -30,29 +34,13 @@ public class LoginController
 	
 	@UnLoginNeeded
 	@PostMapping("/login")
-	public void login(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpServletRequest request, HttpServletResponse response) throws IOException
+	public LoginResponse login(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
 		String sessionId = request.getSession().getId();
 		BlogUser blogUser = blogUserBussiness.login(userName, passWord, sessionId);
 		if (blogUser != null)
-			response.sendRedirect("/");
+			return context.getBean("loginSuccessResponse", LoginResponse.class);
 		else
-			response.sendRedirect("/login");
-	}
-
-	@GetMapping("/register")
-	public ModelAndView register()
-	{
-		return new ModelAndView("register.html");
-	}
-	
-	@PostMapping("/register")
-	public void register(@RequestParam("username") String userName, @RequestParam("password") String passWord, @RequestParam("email") String email, HttpServletRequest request, HttpServletResponse response) throws IOException
-	{
-		BlogUser blogUser = new BlogUser(userName, passWord, email);
-		if (blogUserBussiness.register(blogUser))
-			response.sendRedirect("/login");
-		else
-			response.sendRedirect("/register");
+			return context.getBean("loginFailResponse", LoginResponse.class);
 	}
 }
