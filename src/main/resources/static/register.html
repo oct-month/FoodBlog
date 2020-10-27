@@ -11,21 +11,29 @@
 </head>
 
 <body class="text-center">
-    <form id="registerForm" class="form-register" action="" method="POST">
+    <div id="registerPop">
+        <div class="alert alert-success" role="alert" v-if="register && register_status">
+            注册成功
+        </div>
+        <div class="alert alert-danger" role="alert" v-if="register && !register_status">
+            注册失败，用户名已被使用
+        </div>
+    </div>
+    <form id="registerForm" class="form-register" action="" method="POST" v-on:submit="doRegister">
         <img class="mb-4" src="img/register.jpg" alt="" width="120" height="120">
         <div class="form-group" style="text-align:left;">
             <label for="InputUserName">UserName</label>
-            <input name="username" type="text" class="form-control" id="InputUserName" required autofocus>
+            <input name="username" v-model="username" type="text" class="form-control" id="InputUserName" required autofocus>
         </div>
         <div class="form-group" style="text-align:left;">
             <label for="InputPassword1">Password</label>
-            <input name="password" type="password" class="form-control" id="InputPassword1" required>
+            <input name="password" v-model="password" type="password" class="form-control" id="InputPassword1" required>
         </div>
         <div class="form-group" style="text-align:left;">
             <label for="InputEmail1">Email address</label>
-            <input name="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" required>
+            <input name="email" v-model="email" type="email" class="form-control" id="InputEmail1" aria-describedby="emailHelp" required v-on:keyup.enter="doRegister">
         </div>
-        <input type="button" class="btn btn-lg btn-primary btn-block" v-on:click="doRegister">注册</button>
+        <input type="button" class="btn btn-lg btn-primary btn-block" v-on:click="doRegister" value="注册">
     </form>
 
     <!-- BootStrap -->
@@ -44,12 +52,46 @@
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- 注册操作 -->
     <script>
+        var registerPop = new Vue({
+            el: "#registerPop",
+            data: {
+                register: false,
+                register_status: false
+            }
+        })
         var registerForm = new Vue({
             el: "#registerForm",
-            data: {},
+            data: {
+                username: "",
+                password: "",
+                email: ""
+            },
             methods: {
-                doRegister: ()=> {
-                    // TODO
+                doRegister: function() {
+                    if (this.username != "" && this.password != "" && this.email != "")
+                    {
+                        axios({
+                            method: "POST",
+                            url: "/register",
+                            params: {
+                                username: this.username,
+                                password: this.password,
+                                email: this.email
+                            }
+                        })
+                        .then(function(response) {
+                            var data = response.data
+                            registerPop.register = true
+                            registerPop.register_status = data.success
+                            if (data.success)   // 注册成功
+                            {
+                                window.location = "/login?username=" + registerForm.username
+                            }
+                        })
+                        .catch(function(error) {
+                            console.log(error)
+                        })
+                    }
                 }
             }
         })

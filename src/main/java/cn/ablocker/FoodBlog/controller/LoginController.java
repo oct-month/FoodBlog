@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +27,7 @@ public class LoginController
 	private ApplicationContext context;
 	@Autowired
 	private BlogUserBussiness blogUserBussiness;
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
 	
 	@GetMapping("/login")
 	public ModelAndView login(HttpServletRequest request, HttpServletResponse response)
@@ -36,6 +39,9 @@ public class LoginController
 	@PostMapping("/login")
 	public LoginResponse login(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpServletRequest request, HttpServletResponse response) throws IOException
 	{
+		// TODO
+		logger.info("param用户名:{}", request.getParameter("username"));
+		logger.info("attribute用户名:{}", request.getAttribute("username"));
 		String sessionId = request.getSession().getId();
 		BlogUser blogUser = blogUserBussiness.login(userName, passWord, sessionId);
 		if (blogUser != null)

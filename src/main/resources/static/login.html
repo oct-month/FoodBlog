@@ -11,7 +11,7 @@
 </head>
 
 <body class="text-center">
-    <div  id="loginPop">
+    <div id="loginPop">
         <div class="alert alert-success" role="alert" v-if="login && login_status">
             登陆成功
         </div>
@@ -19,20 +19,20 @@
             登陆失败，用户名或密码错误
         </div>
     </div>
-    <form class="form-signin" action="" method="POST" id="loginForm">
+    <form id="loginForm" class="form-signin" action="" method="POST" v-on:submit="doLogin">
         <img class="mb-4" src="img/login.jpg" alt="" width="120" height="120">
         <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
         <label for="inputUsername" class="sr-only">用户名</label>
         <input name="username" v-model="username" type="text" id="inputUsername" class="form-control" placeholder="UserName" required autofocus>
         <label for="inputPassword" class="sr-only">密码</label>
-        <input name="password"  v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required>
+        <input name="password"  v-model="password" type="password" id="inputPassword" class="form-control" placeholder="Password" required v-on:keyup.enter="doLogin">
         <div class="checkbox mb-3">
             <!-- <label>
                 <input type="checkbox" value="remember-me"> Remember me
             </label> -->
         </div>
         <input type="button" class="btn btn-lg btn-primary btn-block" v-on:click="doLogin" value="Sign in">
-        <button class="btn btn-lg btn-primary btn-block" onclick="location='/register'">Register</button>
+        <input type="button" class="btn btn-lg btn-primary btn-block" onclick="location='/register'" value="Register">
         <p class="mt-5 mb-3 text-muted">&copy; 2020-2021</p>
     </form>
 
@@ -50,6 +50,8 @@
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 自定义 -->
+    <script src="js/request_util.js"></script>
     <!-- 登陆操作 -->
     <script>
         var poPup = new Vue({
@@ -62,11 +64,11 @@
         var loginForm = new Vue({
             el: "#loginForm",
             data: {
-                username: "",
+                username: getUrlParams("username"),
                 password: ""
             },
             methods: {
-                doLogin: ()=> {
+                doLogin: function() {
                     if (this.username != "" && this.password != "")
                     {
                         axios({
@@ -77,14 +79,14 @@
                                 password: this.password
                             }
                         })
-                        .then((response)=> {
+                        .then(function(response) {
+                            var data = response.data
                             poPup.login = true
-                            data = response.data
                             poPup.login_status = data.success
                             if (data.success === true)
                                 window.location = "/"
                         })
-                        .catch((error)=> {
+                        .catch(function(error) {
                             console.log(error)
                         })
                     }

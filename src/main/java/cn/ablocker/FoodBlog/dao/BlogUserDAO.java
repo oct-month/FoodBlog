@@ -18,13 +18,18 @@ public class BlogUserDAO
 	public int addAnUser(BlogUser blogUser)
 	{
 		String sql = "insert into BlogUser(user_name, pass_word, email) values(?, ?, ?)";
-		return jdbcTemplate.update(sql, blogUser.getUserName(), blogUser.getPassWord(), blogUser.getEmail());
+		try {
+			return jdbcTemplate.update(sql, blogUser.getUserName(), blogUser.getPassWord(), blogUser.getEmail());
+		}
+		catch (DataAccessException e) {
+			return 0;
+		}
 	}
 	
 	public BlogUser findAnUser(String userName, String passWord)
 	{
 		String sql = "select * from BlogUser where user_name=? and pass_word=?";
-		RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<BlogUser>(BlogUser.class);
+		RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<>(BlogUser.class);
 		try {
 			return jdbcTemplate.queryForObject(sql, rowMapper, userName, passWord);
 		}
