@@ -842,7 +842,7 @@ li.breadcrumb-item {
 
 .p-mask span {
     display: inline-block;
-    font-size: 14px;
+    /* font-size: 14px; */
 }
 
 .p-mask p {

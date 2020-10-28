@@ -27,13 +27,43 @@
 	<!-- Font-Awesome-Icons-CSS -->
 	<!-- //Custom-Files -->
 
-	<!-- Web-Fonts -->
-	<link
-		href="http://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&amp;subset=devanagari,latin-ext"
-		rel="stylesheet">
-	<link href="http://fonts.googleapis.com/css?family=Hind:300,400,500,600,700&amp;subset=devanagari,latin-ext"
-		rel="stylesheet">
-	<!-- //Web-Fonts -->
+	<!-- Fonts -->
+	<link href="css/google_fonts_poppins.css" rel="stylesheet">
+	<link href="css/google_fonts_hind.css" rel="stylesheet">
+	<!-- //Fonts -->
+	<style>
+		#thumbs-up {
+			color: #999;
+			font-family: PingFang SC,Hiragino Sans GB,Arial,Microsoft YaHei,Verdana,Roboto,Noto,Helvetica Neue,sans-serif !important;
+			outline: none;
+			text-decoration: none;
+			margin: 0;
+			padding: 0;
+			-webkit-box-sizing: border-box;
+			background: transparent;
+			word-break: break-all;
+			list-style: none;
+			text-align: -webkit-match-parent;
+			box-sizing: border-box;
+			margin-right: 20px;
+		}
+		svg {
+			width: 30px;
+			height: 30px;
+			display: inline-block;
+			text-align: center;
+			vertical-align: -5px;
+			fill: #6b6b6b;
+		}
+		.num {
+			width: 30px;
+			height: 30px;
+			color: #349edf;
+			line-height: 24px;
+			list-style: none;
+			font-size: 25px;
+		}
+	</style>
 </head>
 
 <body>
@@ -82,58 +112,37 @@
 	<!-- blog -->
 	<section class="wthree-row py-5">
 		<div class="container py-xl-5 py-lg-3">
-			<div class="blog-left-content">
+			<div class="blog-left-content" id="blogs">
+				<!-- 一篇博客开始 -->
 				<div class="creatives-grid">
-					<a href="single.html">
+					<div>
 						<img src="images/bbb2.jpg" alt=" " class="img-fluid" />
-					</a>
+					</div>
 					<div class="p-mask img-thumbnail">
-						<h4><a href="single.html">Heading here</a></h4>
-						<span class="let mt-3">Feb 20, 2019</span>
+						<h4><a href="javascript:void(0);">{{title}}</a></h4>
+						<span class="let mt-3">{{publish_time}}</span>
 						<hr>
-						<p>Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy eirmod tempor. no sea
-							takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy
-							eirmod tempor. no sea
-							takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy
-							eirmod tempor. no sea
-							takimata sanctus est Loremipsum.</p>
-						<a class="btn button-style-w3ls mt-4" href="single.html">Read More</a>
+						<p>{{content}}</p>
+						<!-- 点赞、评论 -->
+						<div class="mt-4">
+							<div class="input-group mb-3">
+								<a id="thumbs-up" href="javascript:void(0);">
+									<span class="text">
+										<svg t="1568705992128" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="17031" width="200" height="200">
+											<path d="M724.928 976.384H339.712a143.04 143.04 0 0 1-141.888-131.008L165.76 444.544a141.44 141.44 0 0 1 33.536-103.616 141.696 141.696 0 0 1 108.288-50.048h39.296c129.856 0 164.16-107.392 164.16-164.224C511.04 63.552 560.832 16 626.944 16c44.992 0 87.296 22.4 113.152 59.904 29.76 43.072 48.576 120.896 20.992 214.976h88.256a142.528 142.528 0 0 1 140.544 164.992l-54.656 341.056a211.968 211.968 0 0 1-210.304 179.456z m-417.28-589.504c-16 1.152-27.264 6.848-35.264 16.32a46.208 46.208 0 0 0-10.944 33.728l32.064 400.832c1.92 23.872 22.208 42.624 46.208 42.624h385.216a116.48 116.48 0 0 0 115.584-98.56l54.656-341.312a46.4 46.4 0 0 0-45.76-53.632h-159.168a48.128 48.128 0 0 1-42.752-69.952c48.064-93.44 29.952-162.88 13.632-186.56a41.92 41.92 0 0 0-34.112-18.368c-13.184 0-19.904 4.928-19.904 14.656C607.104 256 517.76 386.88 346.944 386.88h-39.296zM111.104 976.384a48.064 48.064 0 0 1-47.808-44.16l-47.168-589.44a48 48 0 0 1 44.032-51.712 48.512 48.512 0 0 1 51.648 44.032l47.168 589.44a48.064 48.064 0 0 1-44.032 51.712l-3.84 0.128z" fill="" p-id="17032"></path>
+										</svg>
+									</span>
+									<span class="num">{{likes}}</span>
+								</a>
+								<input type="text" class="form-control" placeholder="发条友善的评论" aria-label="发条友善的评论" aria-describedby="button-addon2" v-model="comment">
+								<div class="input-group-append">
+									<button class="btn btn-outline-secondary" type="button" id="button-addon2">发表评论</button>
+								</div>
+							</div>
+						</div>
 					</div>
 				</div>
-				<div class="creatives-grid">
-					<a href="single.html">
-						<img src="images/bbb1.jpg" alt=" " class="img-fluid" />
-					</a>
-					<div class="p-mask img-thumbnail">
-						<h4><a href="single.html">Heading here</a></h4>
-						<span class="let mt-3">Feb 20, 2019</span>
-						<hr>
-						<p>Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy eirmod tempor. no sea
-							takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy
-							eirmod tempor. no sea
-							takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy
-							eirmod tempor. no sea
-							takimata sanctus est Loremipsum.</p>
-						<a class="btn button-style-w3ls mt-4" href="single.html">Read More</a>
-					</div>
-				</div>
-				<div class="creatives-grid">
-					<a href="single.html">
-						<img src="images/bbb3.jpg" alt=" " class="img-fluid" />
-					</a>
-					<div class="p-mask img-thumbnail">
-						<h4><a href="single.html">Heading here</a></h4>
-						<span class="let mt-3">Feb 20, 2019</span>
-						<hr>
-						<p>Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy eirmod tempor. no sea
-							takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy
-							eirmod tempor. no sea
-							takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy
-							eirmod tempor. no sea
-							takimata sanctus est Loremipsum.</p>
-						<a class="btn button-style-w3ls mt-4" href="single.html">Read More</a>
-					</div>
-				</div>
+				<!-- //一篇博客结束 -->
 				<!--
 				<nav aria-label="Page navigation example">
 					<ul class="pagination float-left mt-5">
@@ -190,6 +199,23 @@
 	</a>
 	<!-- //move top icon -->
 
+	<!-- Vue -->
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<!-- 自己写的 -->
+	<script>
+		var thumbs = new Vue({
+			el: "#blogs",
+			data: {
+				title: "标题",
+				publish_time: "Feb 20, 2019",
+				content: "内容：Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy eirmod tempor. no sea takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy eirmod tempor. no sea takimata sanctus est Loremipsum.Neque porro est Lorem ipsum dolor sit amet,sed diam nonumy eirmod tempor. no sea takimata sanctus est Loremipsum.",
+				likes: 51,
+				comment: ""
+
+			},
+			methods: {}
+		})
+	</script>
 </body>
 
 </html>
