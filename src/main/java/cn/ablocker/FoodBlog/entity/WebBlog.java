@@ -6,11 +6,11 @@ import java.sql.Timestamp;
 public class WebBlog
 {
     private int id;
-    private String userName;        // 关联到BlogUser的用户名
     private Timestamp publishTime;  // 发布博客的时间
     private String title;           // 标题
     private String content;         // 文字内容
     private Blob img;               // 图片
+    private int likes;              // 点赞数
 
     public int getId()
     {
@@ -20,16 +20,6 @@ public class WebBlog
     public void setId(int id)
     {
         this.id = id;
-    }
-
-    public String getUserName()
-    {
-        return userName;
-    }
-
-    public void setUserName(String userName)
-    {
-        this.userName = userName;
     }
 
     public Timestamp getPublishTime()
@@ -70,5 +60,15 @@ public class WebBlog
     public void setImg(Blob img)
     {
         this.img = img;
+    }
+
+    public int getLikes()
+    {
+        return likes;
+    }
+
+    public void setLikes(int likes)
+    {
+        this.likes = likes;
     }
 }

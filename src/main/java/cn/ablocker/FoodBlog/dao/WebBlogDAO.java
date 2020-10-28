@@ -8,6 +8,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.ablocker.FoodBlog.entity.WebBlog;
 
@@ -17,11 +18,20 @@ public class WebBlogDAO
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-    public int addAnBlog(WebBlog blog)
+    @Transactional
+    public int addAnBlog(String userName, WebBlog blog)
     {
-        String sql = "insert into WebBlog(user_name, publish_time, title, content, img) values(?, ?, ?, ?, ?)";
+        String sql1 = "insert into WebBlog(publish_time, title, content, img) values(?, ?, ?, ?, ?)";
+        String sql2 = "insert into BlogUser_WebBlog(user_name, blog_id) values(?, ?)";
+        String sql3 = "select LAST_INSERT_ID()";
         try {
-            return jdbcTemplate.update(sql, blog.getUserName(), blog.getPublishTime(), blog.getTitle(), blog.getContent(), blog.getImg());
+            int result = jdbcTemplate.update(sql1, blog.getPublishTime(), blog.getTitle(), blog.getContent(), blog.getImg());
+            int blogId = jdbcTemplate.queryForObject(sql3, Integer.class);
+            if (result == 1)
+            {
+                result = jdbcTemplate.update(sql2, userName, blogId);
+            }
+            return result;
         }
         catch (DataAccessException e) {
             e.printStackTrace();
