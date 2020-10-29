@@ -1,7 +1,6 @@
 package cn.ablocker.FoodBlog.bussiness;
 
-import java.sql.Blob;
-import java.sql.Timestamp;
+import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 
 import cn.ablocker.FoodBlog.dao.WebBlogDAO;
 import cn.ablocker.FoodBlog.entity.WebBlog;
+import cn.ablocker.FoodBlog.util.ImgHelper;
 
 @Component
 public class BlogBussiness
@@ -29,15 +29,13 @@ public class BlogBussiness
     }
 
     // 增加一篇博客
-    public WebBlog addBlog(String userName, String title, String content, Blob img)
+    public WebBlog addBlog(String userName, String title, String content, String img)
     {
         WebBlog blog = new WebBlog();
-        blog.setUserName(userName);
-        blog.setPublishTime(new Timestamp(System.currentTimeMillis()));
         blog.setTitle(title);
         blog.setContent(content);
-        blog.setImg(img);
-        if (webBlogDAO.addAnBlog(blog) == 1)
+        blog.setImg(new ByteArrayInputStream(ImgHelper.decodeFile(img)));
+        if (webBlogDAO.addAnBlog(userName, blog) == 1)
             return blog;
         else
             return null;

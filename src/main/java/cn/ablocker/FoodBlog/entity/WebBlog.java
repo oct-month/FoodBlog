@@ -1,6 +1,6 @@
 package cn.ablocker.FoodBlog.entity;
 
-import java.sql.Blob;
+import java.io.ByteArrayInputStream;
 import java.sql.Timestamp;
 
 public class WebBlog
@@ -9,7 +9,7 @@ public class WebBlog
     private Timestamp publishTime;  // 发布博客的时间
     private String title;           // 标题
     private String content;         // 文字内容
-    private Blob img;               // 图片
+    private ByteArrayInputStream img;// 图片
     private int likes;              // 点赞数
 
     public int getId()
@@ -52,12 +52,12 @@ public class WebBlog
         this.content = content;
     }
 
-    public Blob getImg()
+    public ByteArrayInputStream getImg()
     {
         return img;
     }
 
-    public void setImg(Blob img)
+    public void setImg(ByteArrayInputStream img)
     {
         this.img = img;
     }
