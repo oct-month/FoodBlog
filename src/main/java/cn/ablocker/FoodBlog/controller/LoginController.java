@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -31,11 +31,11 @@ public class LoginController
 	}
 
 	@UnLoginNeeded
-	@PostMapping("/api/login")
-	public LoginResponse login(@RequestParam("username") String userName, @RequestParam("password") String passWord, HttpServletRequest request, HttpServletResponse response)
+	@PostMapping(value = "/api/login", produces = "application/json")
+	public LoginResponse login(@RequestBody BlogUser blogUser, HttpServletRequest request, HttpServletResponse response)
 	{
 		String sessionId = request.getSession().getId();
-		BlogUser blogUser = loginBussiness.login(userName, passWord, sessionId);
+		blogUser = loginBussiness.login(blogUser.getUserName(), blogUser.getPassWord(), sessionId);
 		if (blogUser != null)
 			return context.getBean("loginSuccessResponse", LoginResponse.class);
 		else

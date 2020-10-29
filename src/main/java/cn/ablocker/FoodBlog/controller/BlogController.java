@@ -1,8 +1,8 @@
 package cn.ablocker.FoodBlog.controller;
 
-import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -12,7 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.ablocker.FoodBlog.annotation.LoginNeeded;
@@ -35,24 +35,27 @@ public class BlogController
     
     @LoginNeeded
     @GetMapping("/api/blogs")
-    public BlogsResponse getAllBlogs()
+    public BlogsResponse getAllBlogs(HttpServletRequest request, HttpServletResponse response)
     {
         return (BlogsResponse) context.getBean(BLOGS_RESPONSE_BEAN, new Object[] {blogBussiness.getBlogs()});
     }
 
     @LoginNeeded
     @GetMapping("/api/blogs/{userName}")
-    public BlogsResponse getUserBlogs(@PathVariable("userName") String userName)   
+    public BlogsResponse getUserBlogs(@PathVariable("userName") String userName, HttpServletRequest request, HttpServletResponse response)   
     {
         return (BlogsResponse) context.getBean(BLOGS_RESPONSE_BEAN, new Object[] {blogBussiness.getBlogs(userName)});
     }
 
     @LoginNeeded
-    @PostMapping("/api/add/blog")
-    public BlogsResponse addAnBlog(@RequestParam("title") String title, @RequestParam("content") String content, @RequestParam("img") String img, HttpServletRequest request, HttpServletResponse response)
+    @PostMapping(value = "/api/add/blog", produces = "application/json")
+    public BlogsResponse addAnBlog(@RequestBody Map<String, String> blogValue, HttpServletRequest request, HttpServletResponse response)
     {
         String sessionId = request.getSession().getId();
         String userName = loginBussiness.getUserName(sessionId);
+        String title = blogValue.get("title");
+        String content = blogValue.get("content");
+        String img = blogValue.get("img");
         WebBlog blog = blogBussiness.addBlog(userName, title, content, img);
         List<WebBlog> blogs = new ArrayList<>();
         blogs.add(blog);

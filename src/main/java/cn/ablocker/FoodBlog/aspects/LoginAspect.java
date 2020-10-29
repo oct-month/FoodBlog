@@ -20,10 +20,10 @@ public class LoginAspect
 	@Autowired
 	private LoginBussiness loginBussiness;
 	
-	@Pointcut("@annotation(cn.ablocker.FoodBlog.annotation.LoginNeeded) && args(request, response)")
+	@Pointcut("@annotation(cn.ablocker.FoodBlog.annotation.LoginNeeded) && args(request, response, ..)")
 	public void loginNeeded(HttpServletRequest request, HttpServletResponse response) {}
 	
-	@Pointcut("@annotation(cn.ablocker.FoodBlog.annotation.UnLoginNeeded) && args(request, response)")
+	@Pointcut("@annotation(cn.ablocker.FoodBlog.annotation.UnLoginNeeded) && args(request, response, ..)")
 	public void unLoginNeeded(HttpServletRequest request, HttpServletResponse response) {}
 	
 	// 没有登录的用户重定向到登录页面

@@ -76,9 +76,9 @@
                         axios({
                             method: "POST",
                             url: "/api/login",
-                            params: {
-                                username: this.username,
-                                password: this.password
+                            data: {
+                                "userName": this.username,
+                                "passWord": this.password
                             }
                         })
                         .then(function(response) {

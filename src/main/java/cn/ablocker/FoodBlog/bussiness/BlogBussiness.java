@@ -1,6 +1,5 @@
 package cn.ablocker.FoodBlog.bussiness;
 
-import java.io.ByteArrayInputStream;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +33,7 @@ public class BlogBussiness
         WebBlog blog = new WebBlog();
         blog.setTitle(title);
         blog.setContent(content);
-        blog.setImg(new ByteArrayInputStream(ImgHelper.decodeFile(img)));
+        blog.setImg(ImgHelper.decodeFile(img));
         if (webBlogDAO.addAnBlog(userName, blog) == 1)
             return blog;
         else

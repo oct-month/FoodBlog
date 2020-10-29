@@ -75,10 +75,10 @@
                         axios({
                             method: "POST",
                             url: "/api/register",
-                            params: {
-                                username: this.username,
-                                password: this.password,
-                                email: this.email
+                            data: {
+                                "userName": this.username,
+                                "passWord": this.password,
+                                "email": this.email
                             }
                         })
                         .then(function(response) {
