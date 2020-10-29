@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 import cn.ablocker.FoodBlog.entity.BlogUser;
 
@@ -14,22 +15,26 @@ public class BlogUserDAO
 {
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
+
+	private RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<>(BlogUser.class);
 	
-	public int addAnUser(BlogUser blogUser)
+	// 增加一个用户，返回用户名
+	@Transactional
+	public String addAnUser(BlogUser blogUser)
 	{
 		String sql = "insert into BlogUser(user_name, pass_word, email) values(?, ?, ?)";
 		try {
-			return jdbcTemplate.update(sql, blogUser.getUserName(), blogUser.getPassWord(), blogUser.getEmail());
+			jdbcTemplate.update(sql, blogUser.getUserName(), blogUser.getPassWord(), blogUser.getEmail());
+			return blogUser.getUserName();
 		}
 		catch (DataAccessException e) {
-			return 0;
+			return null;
 		}
 	}
 	
 	public BlogUser findAnUser(String userName, String passWord)
 	{
 		String sql = "select * from BlogUser where user_name=? and pass_word=?";
-		RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<>(BlogUser.class);
 		try {
 			return jdbcTemplate.queryForObject(sql, rowMapper, userName, passWord);
 		}

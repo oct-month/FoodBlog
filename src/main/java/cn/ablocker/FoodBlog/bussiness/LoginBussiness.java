@@ -38,7 +38,7 @@ public class LoginBussiness
 	// 注册
 	public boolean register(BlogUser blogUser)
 	{
-		if (blogUserDAO.addAnUser(blogUser) == 1)
+		if (!StringUtils.isEmpty(blogUserDAO.addAnUser(blogUser)))
 			return true;
 		else
 			return false;

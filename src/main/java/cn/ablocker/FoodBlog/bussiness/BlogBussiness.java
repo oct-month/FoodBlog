@@ -27,15 +27,16 @@ public class BlogBussiness
         return webBlogDAO.findUserBlogs(userName);
     }
 
-    // 增加一篇博客
+    // 增加一篇博客，并返回这篇博客
     public WebBlog addBlog(String userName, String title, String content, String img)
     {
         WebBlog blog = new WebBlog();
         blog.setTitle(title);
         blog.setContent(content);
         blog.setImg(ImgHelper.decodeFile(img));
-        if (webBlogDAO.addAnBlog(userName, blog) == 1)
-            return blog;
+        int blogId = webBlogDAO.addAnBlog(userName, blog);
+        if ( blogId != 0)
+            return webBlogDAO.findAnBlog(blogId);
         else
             return null;
     }

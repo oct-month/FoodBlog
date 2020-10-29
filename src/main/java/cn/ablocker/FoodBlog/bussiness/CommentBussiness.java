@@ -12,13 +12,14 @@ public class CommentBussiness
     @Autowired
     private CommentDAO commentDAO;
 
-    // 添加一条评论
+    // 添加一条评论，并返回这条评论
     public Comment addComment(int blogId, String content)
     {
         Comment comment = new Comment();
         comment.setContent(content);
-        if (commentDAO.addAnComment(blogId, comment) == 1)
-            return comment;
+        int commentId = commentDAO.addAnComment(blogId, comment);
+        if (commentId != 0)
+            return commentDAO.findAnComment(commentId);
         else
             return null;
     }
