@@ -134,11 +134,16 @@
 									</span>
 									<span class="num">{{blog.likes}}</span>
 								</a>
-								<input type="text" class="form-control" placeholder="发条友善的评论" aria-label="发条友善的评论" aria-describedby="button-addon2" v-model="comment">
+								<input type="text" class="form-control" placeholder="发条友善的评论" aria-label="发条友善的评论" aria-describedby="button-addon2" v-model="newComments[i]">
 								<div class="input-group-append">
-									<button class="btn btn-outline-secondary" type="button" id="button-addon2" v-on:click="">发表评论</button>
+									<button class="btn btn-outline-secondary" type="button" id="button-addon2" v-on:click="addComment(i, blog.id)">发表评论</button>
 								</div>
 							</div>
+						</div>
+						<!-- 已有的评论 -->
+						<div v-for="comment in blog.comments">
+							<hr>
+							<p>{{comment.content}}</p>
 						</div>
 					</div>
 				</div>
@@ -210,44 +215,85 @@
 			data: {
 				blogs: [			// 所有博客
 				],
-				comment: ""
+				newComments: [		// 新增评论
+				]
 			},
 			methods: {
-				getBlogs: function() {	// 获取所有博客
+				getBlogs: function() {
+					// 获取所有博客
+					var that = this
 					axios({
 						method: "GET",
 						url: "/api/blogs"
 					})
 					.then(function(response) {
-						var data = response.data
-						data.blogs.forEach(item => {
-							if (item.imgHead === null || item.img === null)
+						var data = response.data;
+						data.blogs.forEach(blog => {
+							that.newComments.push("");
+							if (blog.imgHead === null || blog.img === null)
 							{
-								item.img = ""
-								item.imgHead = ""
+								blog.img = ""
+								blog.imgHead = ""
 							}
 						});
-						thumbs.blogs = data.blogs
+						that.blogs = data.blogs;
+						// 获取评论
+						that.blogs.forEach(blog => {
+							axios({
+								method: "GET",
+								url: "/api/comment/" + blog.id
+							})
+							.then(function(response) {
+								Vue.set(blog, "comments", response.data.comments);
+							})
+							.catch(function(error) {
+								console.log(error);
+							});
+						});
 					})
 					.catch(function(error) {
-						console.log(error)
-					})
+						console.log(error);
+					});
 				},
 				addlikes: function(i, blogId) {
+					// 点赞
+					var that = this
 					axios({
 						method: "PUT",
 						url: "api/add/likes/" + blogId
 					})
 					.then(function(response) {
-						thumbs.blogs[i].likes ++
+						that.blogs[i].likes ++;
 					})
 					.catch(function(error) {
-						console.log(error)
-					})
+						console.log(error);
+					});
+				},
+				addComment: function(i, blogId) {
+					// 发表评论
+					if (this.newComments[i] != "")
+					{
+						var that = this;
+						axios({
+							method: "POST",
+							url: "/api/add/comment",
+							data: {
+								"content": that.newComments[i],
+								"blogId": blogId
+							}
+						})
+						.then(function(response) {
+							that.newComments[i] = "";
+							that.blogs[i].comments.push(response.data.comments[0]);
+						})
+						.catch(function(error) {
+							console.log(error)
+						});
+					}
 				}
 			},
-			mounted: function() {		// 给博客点赞
-				this.getBlogs()
+			mounted: function() {
+				this.getBlogs();
 			}
 		})
 	</script>
