@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 import cn.ablocker.FoodBlog.annotation.UnLoginNeeded;
 import cn.ablocker.FoodBlog.bussiness.LoginBussiness;
 import cn.ablocker.FoodBlog.entity.BlogUser;
-import cn.ablocker.FoodBlog.response.LoginResponse;
+import cn.ablocker.FoodBlog.response.CommonResponse;
 
 @RestController
 public class LoginController
@@ -32,13 +32,13 @@ public class LoginController
 
 	@UnLoginNeeded
 	@PostMapping(value = "/api/login", produces = "application/json")
-	public LoginResponse login(@RequestBody BlogUser blogUser, HttpServletRequest request, HttpServletResponse response)
+	public CommonResponse login(@RequestBody BlogUser blogUser, HttpServletRequest request, HttpServletResponse response)
 	{
 		String sessionId = request.getSession().getId();
 		blogUser = loginBussiness.login(blogUser.getUserName(), blogUser.getPassWord(), sessionId);
 		if (blogUser != null)
-			return context.getBean("loginSuccessResponse", LoginResponse.class);
+			return context.getBean("loginSuccessResponse", CommonResponse.class);
 		else
-			return context.getBean("loginFailResponse", LoginResponse.class);
+			return context.getBean("loginFailResponse", CommonResponse.class);
 	}
 }

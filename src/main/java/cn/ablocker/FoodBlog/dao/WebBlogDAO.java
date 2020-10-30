@@ -24,9 +24,9 @@ public class WebBlogDAO
     @Transactional
     public int addAnBlog(String userName, WebBlog blog)
     {
-        String sql1 = "insert into WebBlog(publish_time, title, content, img) values(current_timestamp(), ?, ?, ?)";
+        String sql1 = "insert into WebBlog(publish_time, title, content, img_head, img) values(current_timestamp(), ?, ?, ?, ?)";
         String sql2 = "insert into BlogUser_WebBlog(user_name, blog_id) values(?, ?)";
-        jdbcTemplate.update(sql1, blog.getTitle(), blog.getContent(), blog.getImg());
+        jdbcTemplate.update(sql1, blog.getTitle(), blog.getContent(), blog.getImgHead(), blog.getImg());
         int blogId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
         jdbcTemplate.update(sql2, userName, blogId);
         return blogId;
@@ -42,6 +42,14 @@ public class WebBlogDAO
         catch (DataAccessException e) {
             return null;
         }
+    }
+
+    // 更新博客的 likes
+    @Transactional
+    public void updataLikes(int likes, int blogId)
+    {
+        String sql = "update WebBlog set likes=? where id=?";
+        jdbcTemplate.update(sql, likes, blogId);
     }
 
     // 查找所有博客

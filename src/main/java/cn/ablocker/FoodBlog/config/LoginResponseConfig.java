@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import cn.ablocker.FoodBlog.response.LoginResponse;
+import cn.ablocker.FoodBlog.response.CommonResponse;
 
 @Configuration
 public class LoginResponseConfig
@@ -12,9 +12,9 @@ public class LoginResponseConfig
     // 登录成功的响应
     @Bean
     @Scope("prototype")
-    public LoginResponse loginSuccessResponse()
+    public CommonResponse loginSuccessResponse()
     {
-        LoginResponse response = new LoginResponse();
+        CommonResponse response = new CommonResponse();
         response.setStatus(201);
         response.setSuccess(true);
         return response;
@@ -23,9 +23,9 @@ public class LoginResponseConfig
     // 登陆失败的响应
     @Bean
     @Scope("prototype")
-    public LoginResponse loginFailResponse()
+    public CommonResponse loginFailResponse()
     {
-        LoginResponse response = new LoginResponse();
+        CommonResponse response = new CommonResponse();
         response.setStatus(403);
         response.setSuccess(false);
         return response;

@@ -12,6 +12,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,6 +21,7 @@ import cn.ablocker.FoodBlog.bussiness.BlogBussiness;
 import cn.ablocker.FoodBlog.bussiness.LoginBussiness;
 import cn.ablocker.FoodBlog.entity.WebBlog;
 import cn.ablocker.FoodBlog.response.BlogsResponse;
+import cn.ablocker.FoodBlog.response.CommonResponse;
 
 @RestController
 public class BlogController
@@ -55,10 +57,19 @@ public class BlogController
         String userName = loginBussiness.getUserName(sessionId);
         String title = blogValue.get("title");
         String content = blogValue.get("content");
+        String imgHead = blogValue.get("imgHead");
         String img = blogValue.get("img");
-        WebBlog blog = blogBussiness.addBlog(userName, title, content, img);
+        WebBlog blog = blogBussiness.addBlog(userName, title, content, imgHead, img);
         List<WebBlog> blogs = new ArrayList<>();
         blogs.add(blog);
         return (BlogsResponse) context.getBean(BLOGS_RESPONSE_BEAN, new Object[] {blogs});
+    }
+
+    @LoginNeeded
+    @PutMapping(value = "api/add/likes", produces = "application/json")
+    public CommonResponse addAnLikes(@RequestBody Map<String, Integer> map, HttpServletRequest request, HttpServletResponse response)
+    {
+        blogBussiness.addAnLikes(map.get("blogId"));
+        return context.getBean("likesResponse", CommonResponse.class);
     }
 }

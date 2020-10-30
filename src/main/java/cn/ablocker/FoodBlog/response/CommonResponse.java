@@ -1,6 +1,6 @@
 package cn.ablocker.FoodBlog.response;
 
-public class LoginResponse
+public class CommonResponse
 {
     private int status;         // 请求状态
     private boolean success;    // 是否登陆成功

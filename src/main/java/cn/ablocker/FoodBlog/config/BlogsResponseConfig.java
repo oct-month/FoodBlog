@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Scope;
 
 import cn.ablocker.FoodBlog.entity.WebBlog;
 import cn.ablocker.FoodBlog.response.BlogsResponse;
+import cn.ablocker.FoodBlog.response.CommonResponse;
 
 @Configuration
 public class BlogsResponseConfig
@@ -20,6 +21,17 @@ public class BlogsResponseConfig
         BlogsResponse response = new BlogsResponse();
         response.setStatus(200);
         response.setBlogs(blogs);
+        return response;
+    }
+
+    // 点赞成功的响应
+    @Bean
+    @Scope("prototype")
+    CommonResponse likesResponse()
+    {
+        CommonResponse response = new CommonResponse();
+        response.setStatus(201);
+        response.setSuccess(true);
         return response;
     }
 }

@@ -27,6 +27,7 @@ CREATE TABLE WebBlog (
 	publish_time DATETIME NOT NULL,			-- 发布时间
 	title varchar(255) NULL,				-- 标题
 	content TEXT NULL,						-- 内容
+	img_head varchar(100) NULL,				-- 图片头信息
 	img MEDIUMBLOB NULL,					-- 图片
 	likes INT DEFAULT 0 NOT NULL,			-- 点赞数
 	CONSTRAINT WebBlog_PK PRIMARY KEY (id)

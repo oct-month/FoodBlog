@@ -28,16 +28,23 @@ public class BlogBussiness
     }
 
     // 增加一篇博客，并返回这篇博客
-    public WebBlog addBlog(String userName, String title, String content, String img)
+    public WebBlog addBlog(String userName, String title, String content, String imgHead, String img)
     {
         WebBlog blog = new WebBlog();
         blog.setTitle(title);
         blog.setContent(content);
+        blog.setImgHead(imgHead);
         blog.setImg(ImgHelper.decodeFile(img));
         int blogId = webBlogDAO.addAnBlog(userName, blog);
         if ( blogId != 0)
             return webBlogDAO.findAnBlog(blogId);
         else
             return null;
+    }
+
+    public void addAnLikes(int blogId)
+    {
+        WebBlog blog = webBlogDAO.findAnBlog(blogId);
+        webBlogDAO.updataLikes(blog.getLikes() + 1, blogId);
     }
 }
