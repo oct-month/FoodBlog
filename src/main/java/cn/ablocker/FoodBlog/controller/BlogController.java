@@ -66,10 +66,10 @@ public class BlogController
     }
 
     @LoginNeeded
-    @PutMapping(value = "api/add/likes", produces = "application/json")
-    public CommonResponse addAnLikes(@RequestBody Map<String, Integer> map, HttpServletRequest request, HttpServletResponse response)
+    @PutMapping(value = "api/add/likes/{blogId}", produces = "application/json")
+    public CommonResponse addAnLikes(@PathVariable("blogId") int blogId, HttpServletRequest request, HttpServletResponse response)
     {
-        blogBussiness.addAnLikes(map.get("blogId"));
+        blogBussiness.addAnLikes(blogId);
         return context.getBean("likesResponse", CommonResponse.class);
     }
 }

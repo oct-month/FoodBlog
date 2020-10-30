@@ -22,20 +22,20 @@ public class CommentDAO
 
     // 添加一条评论，返回评论的Id
     @Transactional
-    public int addAnComment(int blogId, Comment comment)
+    public int addAnComment(Comment comment)
     {
         String sql1 = "insert into Comment(content) values(?)";
         String sql2 = "insert into WebBlog_Comment(blog_id, comment_id) values(?, ?)";
         jdbcTemplate.update(sql1, comment.getContent());
         int commentId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
-        jdbcTemplate.update(sql2, blogId, commentId);
+        jdbcTemplate.update(sql2, comment.getBlogId(), commentId);
         return commentId;
     }
 
     // 根据Id查找评论
     public Comment findAnComment(int commentId)
     {
-        String sql = "select * from Comment where id=?";
+        String sql = "select id, content, blog_id from Comment left join WebBlog_Comment on id=comment_id where id=?";
         try {
             return jdbcTemplate.queryForObject(sql, rowMapper, commentId);
         }
@@ -47,7 +47,7 @@ public class CommentDAO
     // 查询博客的所有评论
     public List<Comment> findBlogComments(int blogId)
     {
-        String sql = "select * from Comment where id in (select comment_id from WebBlog_Comment where blog_id=?)";
-        return jdbcTemplate.query(sql, rowMapper, blogId);
+        String sql = "select id, content, ? as blog_id from Comment where id in (select comment_id from WebBlog_Comment where blog_id=?)";
+        return jdbcTemplate.query(sql, rowMapper, blogId, blogId);
     }
 }

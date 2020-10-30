@@ -11,6 +11,7 @@ public class WebBlog
     private String imgHead;         // 图片头信息
     private byte[] img;             // 图片
     private int likes;              // 点赞数
+    private String userName;        // 用户名（关联属性）
 
     public int getId()
     {
@@ -80,5 +81,15 @@ public class WebBlog
     public void setLikes(int likes)
     {
         this.likes = likes;
+    }
+
+    public String getUserName()
+    {
+        return userName;
+    }
+
+    public void setUserName(String userName)
+    {
+        this.userName = userName;
     }
 }

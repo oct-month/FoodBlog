@@ -236,10 +236,7 @@
 				addlikes: function(i, blogId) {
 					axios({
 						method: "PUT",
-						url: "api/add/likes",
-						data: {
-							"blogId": blogId
-						}
+						url: "api/add/likes/" + blogId
 					})
 					.then(function(response) {
 						thumbs.blogs[i].likes ++

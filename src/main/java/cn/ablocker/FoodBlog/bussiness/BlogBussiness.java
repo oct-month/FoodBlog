@@ -35,13 +35,15 @@ public class BlogBussiness
         blog.setContent(content);
         blog.setImgHead(imgHead);
         blog.setImg(ImgHelper.decodeFile(img));
-        int blogId = webBlogDAO.addAnBlog(userName, blog);
+        blog.setUserName(userName);
+        int blogId = webBlogDAO.addAnBlog(blog);
         if ( blogId != 0)
             return webBlogDAO.findAnBlog(blogId);
         else
             return null;
     }
 
+    // 博客 likes ++
     public void addAnLikes(int blogId)
     {
         WebBlog blog = webBlogDAO.findAnBlog(blogId);

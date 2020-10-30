@@ -3,10 +3,12 @@ package cn.ablocker.FoodBlog.bussiness;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import cn.ablocker.FoodBlog.dao.CommentDAO;
 import cn.ablocker.FoodBlog.entity.Comment;
 
+@Component
 public class CommentBussiness
 {
     @Autowired
@@ -17,7 +19,8 @@ public class CommentBussiness
     {
         Comment comment = new Comment();
         comment.setContent(content);
-        int commentId = commentDAO.addAnComment(blogId, comment);
+        comment.setBlogId(blogId);
+        int commentId = commentDAO.addAnComment(comment);
         if (commentId != 0)
             return commentDAO.findAnComment(commentId);
         else
