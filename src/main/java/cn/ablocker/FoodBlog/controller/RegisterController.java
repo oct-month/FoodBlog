@@ -1,8 +1,5 @@
 package cn.ablocker.FoodBlog.controller;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,7 +27,7 @@ public class RegisterController
 	}
 	
 	@PostMapping(value = "/api/register", produces = "application/json")
-	public RegisterResponse register(@RequestBody BlogUser blogUser, HttpServletRequest request, HttpServletResponse response)
+	public RegisterResponse register(@RequestBody BlogUser blogUser)
 	{
 		if (loginBussiness.register(blogUser))
 			return (RegisterResponse) context.getBean("registerSuccessResponse", new Object[] {blogUser.getUserName()});

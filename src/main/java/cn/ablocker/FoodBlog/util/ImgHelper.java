@@ -3,12 +3,17 @@ package cn.ablocker.FoodBlog.util;
 import java.io.*;
 import java.util.Base64;
 import javax.imageio.ImageIO;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.awt.image.BufferedImage;
 
 public class ImgHelper
 {
     private static Base64.Decoder decoder = Base64.getDecoder();
     private static Base64.Encoder encoder = Base64.getEncoder();
+    private static Logger logger = LoggerFactory.getLogger(ImgHelper.class);
 
     //编码图片
     public static String encodeFile(byte[] bytes)
@@ -29,6 +34,7 @@ public class ImgHelper
             baos.close();
         }
         catch(IOException e) {
+            logger.error(e.getMessage(), e);
         }
         return s;
     }
@@ -47,6 +53,7 @@ public class ImgHelper
             baos.close();
         }
         catch(IOException e) {
+            logger.error(e.getMessage(), e);
         }
         return s;
     }
@@ -69,6 +76,7 @@ public class ImgHelper
             bais.close();
         }
         catch(IOException e) {
+            logger.error(e.getMessage(), e);
         }
     }
 }

@@ -1,5 +1,7 @@
 package cn.ablocker.FoodBlog.dao;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -16,6 +18,8 @@ public class BlogUserDAO
 	@Autowired
 	private JdbcTemplate jdbcTemplate;
 
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+
 	private RowMapper<BlogUser> rowMapper = new BeanPropertyRowMapper<>(BlogUser.class);
 	
 	// 增加一个用户，返回用户名
@@ -28,6 +32,7 @@ public class BlogUserDAO
 			return blogUser.getUserName();
 		}
 		catch (DataAccessException e) {
+			logger.error(e.getMessage(), e);
 			return null;
 		}
 	}
@@ -39,6 +44,7 @@ public class BlogUserDAO
 			return jdbcTemplate.queryForObject(sql, rowMapper, userName, passWord);
 		}
 		catch (DataAccessException e) {
+			logger.error(e.getMessage(), e);
 			return null;
 		}
 	}

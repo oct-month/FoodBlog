@@ -30,4 +30,15 @@ public class LoginResponseConfig
         response.setSuccess(false);
         return response;
     }
+
+    // 注销的响应
+    @Bean
+    @Scope("prototype")
+    public CommonResponse unLoginResponse()
+    {
+        CommonResponse response = new CommonResponse();
+        response.setStatus(200);
+        response.setSuccess(true);
+        return response;
+    }
 }

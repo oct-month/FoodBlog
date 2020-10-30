@@ -2,6 +2,8 @@ package cn.ablocker.FoodBlog.dao;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -17,6 +19,8 @@ public class CommentDAO
 {
     @Autowired
     private JdbcTemplate jdbcTemplate;
+
+    private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private RowMapper<Comment> rowMapper = new BeanPropertyRowMapper<>(Comment.class);
 
@@ -40,6 +44,7 @@ public class CommentDAO
             return jdbcTemplate.queryForObject(sql, rowMapper, commentId);
         }
         catch (DataAccessException e) {
+            logger.error(e.getMessage(), e);
             return null;
         }
     }
