@@ -259,7 +259,7 @@
 					var that = this
 					axios({
 						method: "PUT",
-						url: "api/add/likes/" + blogId
+						url: "/api/add/likes/" + blogId
 					})
 					.then(function(response) {
 						that.blogs[i].likes ++;
