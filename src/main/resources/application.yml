@@ -4,7 +4,7 @@ spring:
     username: test
     password: test
     driver-class-name: com.mysql.cj.jdbc.Driver
-    initialization-mode: always
+    initialization-mode: never
   redis:
     host: 127.0.0.1
     port: 6379
