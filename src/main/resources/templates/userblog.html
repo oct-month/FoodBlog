@@ -100,7 +100,7 @@
 					<h4 class="inner-style-w3pvts mr-auto text-wh text-uppercase">Standard</h4>
 					<ol class="breadcrumb">
 						<li class="breadcrumb-item"><a href="/">首页</a></li>
-						<li class="breadcrumb-item" aria-current="page">Blog</li>
+						<li class="breadcrumb-item" aria-current="page" th:text="${specialUser} + '的博客'">Blog</li>
 					</ol>
 				</div>
 			</div>
@@ -283,7 +283,7 @@
 						})
 						.then(function(response) {
 							that.newComments[i] = "";
-							that.blogs[i].comments.push(response.data.comments[0]);
+							that.blogs[i].comments.unshift(response.data.comments[0]);
 						})
 						.catch(function(error) {
 							console.log(error)
