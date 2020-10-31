@@ -2,11 +2,14 @@
 
 > 使用 Spring Boot 开发的美食博客Web应用
 
+
+
 ## 环境
 
 - maven 3.6.3
-
 - openjdk 11
+
+
 
 ## 运行
 
@@ -18,6 +21,8 @@ mvn spring-boot:run
 
 Application 运行在8082端口。
 
+
+
 ## 构建
 
 ```sh
@@ -27,3 +32,4 @@ mvn package
 ```
 
 生成的 jar 包在 target 目录下。
+
