@@ -119,7 +119,11 @@
 						<img v-bind:src="blog.img" alt="" class="img-fluid" />
 					</div>
 					<div class="p-mask img-thumbnail">
-						<h4><a href="javascript:void(0);">{{blog.title}}</a></h4>
+						<h4>
+							<a href="javascript:void(0);">{{blog.title}}</a>
+							<a href="javascript:void(0);">  -- by </a>
+							<a v-bind:href="'/blog/' + blog.userName" target="_self">{{blog.userName}}</a>
+						</h4>
 						<span class="let mt-3">{{blog.publishTime}}</span>
 						<hr>
 						<p>{{blog.content}}</p>
