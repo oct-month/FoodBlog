@@ -39,7 +39,7 @@ public class WebBlogDAO
     // 根据博客Id查找博客
     public WebBlog findAnBlog(int blogId)
     {
-        String sql = "select id, Publish_time, title, content, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id where id=?";
+        String sql = "select id, publish_time, title, content, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id where id=?";
         try {
             return jdbcTemplate.queryForObject(sql, rowMapper, blogId);
         }
@@ -60,14 +60,14 @@ public class WebBlogDAO
     // 查找所有博客
     public List<WebBlog> findAllBlogs()
     {
-        String sql = "select id, Publish_time, title, content, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id";
+        String sql = "select id, publish_time, title, content, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id order by publish_time desc";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     // 查找用户的所有博客
     public List<WebBlog> findUserBlogs(String userName)
     {
-        String sql = "select id, Publish_time, title, content, img, likes, ? as user_name from WebBlog where id in (select blog_id from BlogUser_WebBlog where user_name=?);";
+        String sql = "select id, publish_time, title, content, img, likes, ? as user_name from WebBlog where id in (select blog_id from BlogUser_WebBlog where user_name=?) order by publish_time desc";
         return jdbcTemplate.query(sql, rowMapper, userName, userName);
     }
 }

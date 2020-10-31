@@ -52,7 +52,7 @@ public class CommentDAO
     // 查询博客的所有评论
     public List<Comment> findBlogComments(int blogId)
     {
-        String sql = "select id, content, ? as blog_id from Comment where id in (select comment_id from WebBlog_Comment where blog_id=?)";
+        String sql = "select id, content, ? as blog_id from Comment where id in (select comment_id from WebBlog_Comment where blog_id=?) order by id desc";
         return jdbcTemplate.query(sql, rowMapper, blogId, blogId);
     }
 }
