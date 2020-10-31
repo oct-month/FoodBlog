@@ -1,11 +1,11 @@
 package cn.ablocker.FoodBlog.entity;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 public class WebBlog
 {
     private int id;
-    private Timestamp publishTime;  // 发布博客的时间
+    private Date publishTime;       // 发布博客的时间
     private String title;           // 标题
     private String content;         // 文字内容
     private String img;             // 图片
@@ -22,12 +22,12 @@ public class WebBlog
         this.id = id;
     }
 
-    public Timestamp getPublishTime()
+    public Date getPublishTime()
     {
         return publishTime;
     }
 
-    public void setPublishTime(Timestamp publishTime)
+    public void setPublishTime(Date publishTime)
     {
         this.publishTime = publishTime;
     }

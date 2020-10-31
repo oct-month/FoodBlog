@@ -83,9 +83,8 @@
 							<label for="drop" class="toggle">Menu</label>
 							<input type="checkbox" id="drop" />
 							<ul class="menu">
-								<li><a href="/add/blog" class="nav-style">发布博客</a></li>
-								<li><a href="#" class="nav-style" th:text="${userName}">用户名</a></li>
-								</li>
+								<li><a th:href="@{'/blog/' + ${userName}}" target="_self" class="nav-button nav-style" th:text="${userName}">用户名</a></li>
+								<li><a href="javascript:void(0);" target="_self" class="nav-button nav-style" onclick="unLogin()">注销</a></li>
 							</ul>
 						</nav>
 					</div>
@@ -113,6 +112,7 @@
 	<!-- blog -->
 	<section class="wthree-row py-5">
 		<div class="container py-xl-5 py-lg-3">
+			<a href="/add/blog" target="_self" class="nav-button nav-style" style="font-size: 20px;">+发布博客</a>
 			<div class="blog-left-content" id="blogs">
 				<!-- 一篇博客开始 -->
 				<div class="creatives-grid" v-for="(blog, i) in blogs">
@@ -210,6 +210,7 @@
     <!-- axios -->
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 	<!-- 自己写的 -->
+	<script src="/js/unlogin.js"></script>
 	<script>
 		var thumbs = new Vue({
 			el: "#blogs",
@@ -294,7 +295,7 @@
 				var userName = document.getElementById("special-user").innerText;
 				this.getBlogs(userName);
 			}
-		})
+		});
 	</script>
 </body>
 
