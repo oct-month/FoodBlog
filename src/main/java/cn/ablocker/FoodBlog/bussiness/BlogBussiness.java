@@ -28,13 +28,12 @@ public class BlogBussiness
     }
 
     // 增加一篇博客，并返回这篇博客
-    public WebBlog addBlog(String userName, String title, String content, String imgHead, String img)
+    public WebBlog addBlog(String userName, String title, String content, String img)
     {
         WebBlog blog = new WebBlog();
         blog.setTitle(title);
         blog.setContent(content);
-        blog.setImgHead(imgHead);
-        blog.setImg(ImgHelper.decodeFile(img));
+        blog.setImg(img);
         blog.setUserName(userName);
         int blogId = webBlogDAO.addAnBlog(blog);
         if ( blogId != 0)

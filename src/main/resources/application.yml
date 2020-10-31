@@ -9,6 +9,11 @@ spring:
     host: 182.92.175.167
     port: 6379
     password: testredis
+  thymeleaf:
+    mode: HTML
+    encoding: UTF-8
+    cache: false
+
 
 server:
   port: 8082

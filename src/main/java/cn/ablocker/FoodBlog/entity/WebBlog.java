@@ -8,8 +8,7 @@ public class WebBlog
     private Timestamp publishTime;  // 发布博客的时间
     private String title;           // 标题
     private String content;         // 文字内容
-    private String imgHead;         // 图片头信息
-    private byte[] img;             // 图片
+    private String img;             // 图片
     private int likes;              // 点赞数
     private String userName;        // 用户名（关联属性）
 
@@ -53,22 +52,12 @@ public class WebBlog
         this.content = content;
     }
 
-    public String getImgHead()
-    {
-        return imgHead;
-    }
-
-    public void setImgHead(String imgHead)
-    {
-        this.imgHead = imgHead;
-    }
-
-    public byte[] getImg()
+    public String getImg()
     {
         return img;
     }
 
-    public void setImg(byte[] img)
+    public void setImg(String img)
     {
         this.img = img;
     }

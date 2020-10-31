@@ -28,9 +28,9 @@ public class WebBlogDAO
     @Transactional
     public int addAnBlog(WebBlog blog)
     {
-        String sql1 = "insert into WebBlog(publish_time, title, content, img_head, img) values(current_timestamp(), ?, ?, ?, ?)";
+        String sql1 = "insert into WebBlog(publish_time, title, content, img) values(current_timestamp(), ?, ?, ?)";
         String sql2 = "insert into BlogUser_WebBlog(user_name, blog_id) values(?, ?)";
-        jdbcTemplate.update(sql1, blog.getTitle(), blog.getContent(), blog.getImgHead(), blog.getImg());
+        jdbcTemplate.update(sql1, blog.getTitle(), blog.getContent(), blog.getImg());
         int blogId = jdbcTemplate.queryForObject("select LAST_INSERT_ID()", Integer.class);
         jdbcTemplate.update(sql2, blog.getUserName(), blogId);
         return blogId;
@@ -39,7 +39,7 @@ public class WebBlogDAO
     // 根据博客Id查找博客
     public WebBlog findAnBlog(int blogId)
     {
-        String sql = "select id, Publish_time, title, content, img_head, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id where id=?";
+        String sql = "select id, Publish_time, title, content, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id where id=?";
         try {
             return jdbcTemplate.queryForObject(sql, rowMapper, blogId);
         }
@@ -60,14 +60,14 @@ public class WebBlogDAO
     // 查找所有博客
     public List<WebBlog> findAllBlogs()
     {
-        String sql = "select id, Publish_time, title, content, img_head, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id";
+        String sql = "select id, Publish_time, title, content, img, likes, user_name from WebBlog left join BlogUser_WebBlog on id=blog_id";
         return jdbcTemplate.query(sql, rowMapper);
     }
 
     // 查找用户的所有博客
     public List<WebBlog> findUserBlogs(String userName)
     {
-        String sql = "select id, Publish_time, title, content, img_head, img, likes, ? as user_name from WebBlog where id in (select blog_id from BlogUser_WebBlog where user_name=?);";
+        String sql = "select id, Publish_time, title, content, img, likes, ? as user_name from WebBlog where id in (select blog_id from BlogUser_WebBlog where user_name=?);";
         return jdbcTemplate.query(sql, rowMapper, userName, userName);
     }
 }

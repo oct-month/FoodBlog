@@ -1,7 +1,5 @@
 package cn.ablocker.FoodBlog.controller;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -51,18 +49,18 @@ public class BlogController
 
     @LoginNeeded
     @PostMapping(value = "/api/add/blog", produces = "application/json")
-    public BlogsResponse addAnBlog(@RequestBody Map<String, String> blogValue, HttpServletRequest request, HttpServletResponse response)
+    public CommonResponse addAnBlog(@RequestBody Map<String, String> blogValue, HttpServletRequest request, HttpServletResponse response)
     {
         String sessionId = request.getSession().getId();
         String userName = loginBussiness.getUserName(sessionId);
         String title = blogValue.get("title");
         String content = blogValue.get("content");
-        String imgHead = blogValue.get("imgHead");
         String img = blogValue.get("img");
-        WebBlog blog = blogBussiness.addBlog(userName, title, content, imgHead, img);
-        List<WebBlog> blogs = new ArrayList<>();
-        blogs.add(blog);
-        return (BlogsResponse) context.getBean(BLOGS_RESPONSE_BEAN, new Object[] {blogs});
+        WebBlog blog = blogBussiness.addBlog(userName, title, content, img);
+        if (blog != null)
+            return context.getBean("addBlogSuccessResponse", CommonResponse.class);
+        else
+            return context.getBean("addBlogFailResponse", CommonResponse.class);
     }
 
     @LoginNeeded

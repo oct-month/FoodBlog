@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 
 <head>
-	<title>主页</title>
+	<title th:text="${specialUser} + '的博客'">××的博客</title>
 	<!-- Meta tag Keywords -->
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta charset="UTF-8" />
@@ -19,17 +19,17 @@
 	<!-- //Meta tag Keywords -->
 
 	<!-- Custom-Files -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="/css/bootstrap.css">
 	<!-- Bootstrap-CSS -->
-	<link rel="stylesheet" href="css/style.css" type="text/css" media="all" />
+	<link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
 	<!-- Style-CSS -->
-	<link href="css/font-awesome.min.css" rel="stylesheet">
+	<link href="/css/font-awesome.min.css" rel="stylesheet">
 	<!-- Font-Awesome-Icons-CSS -->
 	<!-- //Custom-Files -->
 
 	<!-- Fonts -->
-	<link href="css/google_fonts_poppins.css" rel="stylesheet">
-	<link href="css/google_fonts_hind.css" rel="stylesheet">
+	<link href="/css/google_fonts_poppins.css" rel="stylesheet">
+	<link href="/css/google_fonts_hind.css" rel="stylesheet">
 	<!-- //Fonts -->
 	<style>
 		#thumbs-up {
@@ -67,6 +67,7 @@
 </head>
 
 <body>
+	<div id="special-user" th:text="${specialUser}" hidden></div>
 	<div class="main-top" id="home">
 		<header>
 			<div class="container-fluid">
@@ -82,8 +83,8 @@
 							<label for="drop" class="toggle">Menu</label>
 							<input type="checkbox" id="drop" />
 							<ul class="menu">
-								<li><a href="/" class="nav-style">首页</a></li>
-								<li><a href="#" class="nav-style">关于我们</a></li>
+								<li><a href="/add/blog" class="nav-style">发布博客</a></li>
+								<li><a href="#" class="nav-style" th:text="${userName}">用户名</a></li>
 								</li>
 							</ul>
 						</nav>
@@ -116,7 +117,7 @@
 				<!-- 一篇博客开始 -->
 				<div class="creatives-grid" v-for="(blog, i) in blogs">
 					<div>
-						<img v-bind:src="blog.imgHead + blog.img" alt="" class="img-fluid" />
+						<img v-bind:src="blog.img" alt="" class="img-fluid" />
 					</div>
 					<div class="p-mask img-thumbnail">
 						<h4><a href="javascript:void(0);">{{blog.title}}</a></h4>
@@ -219,22 +220,19 @@
 				]
 			},
 			methods: {
-				getBlogs: function() {
+				getBlogs: function(userName) {
 					// 获取所有博客
 					var that = this
 					axios({
 						method: "GET",
-						url: "/api/blogs"
+						url: "/api/blogs/" + userName
 					})
 					.then(function(response) {
 						var data = response.data;
 						data.blogs.forEach(blog => {
 							that.newComments.push("");
-							if (blog.imgHead === null || blog.img === null)
-							{
+							if (blog.img === null)
 								blog.img = ""
-								blog.imgHead = ""
-							}
 						});
 						that.blogs = data.blogs;
 						// 获取评论
@@ -293,7 +291,8 @@
 				}
 			},
 			mounted: function() {
-				this.getBlogs();
+				var userName = document.getElementById("special-user").innerText;
+				this.getBlogs(userName);
 			}
 		})
 	</script>

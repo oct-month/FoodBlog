@@ -23,7 +23,9 @@ public class RegisterController
 	@GetMapping("/register")
 	public ModelAndView register()
 	{
-		return new ModelAndView("register.html");
+		ModelAndView view = new ModelAndView();
+		view.setViewName("register.html");
+		return view;
 	}
 	
 	@PostMapping(value = "/api/register", produces = "application/json")

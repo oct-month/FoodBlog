@@ -29,7 +29,9 @@ public class LoginController
 	@GetMapping("/login")
 	public ModelAndView login()
 	{
-		return new ModelAndView("login.html");
+		ModelAndView view = new ModelAndView();
+		view.setViewName("login.html");
+		return view;
 	}
 
 	@UnLogin

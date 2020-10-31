@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <title>发布博客</title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="keywords" content="" />
+    <script>
+        addEventListener("load", function () {
+            setTimeout(hideURLbar, 0);
+        }, false);
+
+        function hideURLbar() {
+            window.scrollTo(0, 1);
+        }
+    </script>
+    <!-- //Meta tag Keywords -->
+
+    <!-- Custom-Files -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Bootstrap-CSS -->
+    <link rel="stylesheet" href="/css/style.css" type="text/css" media="all" />
+    <!-- Style-CSS -->
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <!-- Font-Awesome-Icons-CSS -->
+    <!-- //Custom-Files -->
+
+    <!-- Fonts -->
+    <link href="/css/google_fonts_poppins.css" rel="stylesheet">
+    <link href="/css/google_fonts_hind.css" rel="stylesheet">
+    <!-- //Fonts -->
+    <style>
+        #thumbs-up {
+            color: #999;
+            font-family: PingFang SC, Hiragino Sans GB, Arial, Microsoft YaHei, Verdana, Roboto, Noto, Helvetica Neue, sans-serif !important;
+            outline: none;
+            text-decoration: none;
+            margin: 0;
+            padding: 0;
+            -webkit-box-sizing: border-box;
+            background: transparent;
+            word-break: break-all;
+            list-style: none;
+            text-align: -webkit-match-parent;
+            box-sizing: border-box;
+            margin-right: 20px;
+        }
+
+        svg {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            text-align: center;
+            vertical-align: -5px;
+            fill: #6b6b6b;
+        }
+
+        .num {
+            width: 30px;
+            height: 30px;
+            color: #349edf;
+            line-height: 24px;
+            list-style: none;
+            font-size: 25px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-top" id="home">
+        <header>
+            <div class="container-fluid">
+                <div class="header d-md-flex justify-content-between align-items-center py-3 pl-2">
+                    <!-- logo -->
+                    <div id="logo">
+                        <h1><a href="/">FoodBlog</a></h1>
+                    </div>
+                    <!-- //logo -->
+                    <!-- nav -->
+                    <div class="nav_w3ls">
+                        <nav>
+                            <label for="drop" class="toggle">Menu</label>
+                            <input type="checkbox" id="drop" />
+                            <ul class="menu">
+                                <li><a href="/" class="nav-style">首页</a></li>
+                                <li><a th:href="@{'/blog/' + ${userName}}" class="nav-style"
+                                        th:text="${userName}">用户名</a></li>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- //nav -->
+                </div>
+            </div>
+        </header>
+
+        <!-- banner -->
+        <div class="banner_w3lspvt-2">
+            <div class="container">
+                <div class="d-flex style-w3layouts">
+                    <h4 class="inner-style-w3pvts mr-auto text-wh text-uppercase">Standard</h4>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="#">发布博客</a></li>
+                        <li class="breadcrumb-item" aria-current="page">Blog</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <!-- //banner -->
+    </div>
+    <!-- //main banner -->
+
+    <!-- 发布博客表单 -->
+    <form id="blogForm" method="POST" v-on:submit="addBlog">
+        <div class="form-group">
+            <label for="exampleFormControlInput1">博客主题</label>
+            <input v-model="title" type="text" class="form-control" id="exampleFormControlInput1" placeholder="title">
+        </div>
+        <div class="form-group">
+            <label for="exampleFormControlTextarea1">博客内容</label>
+            <textarea v-model="content" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="fileId">添加图片</label>
+            <input type="file" class="form-control-file" name="file" id="fileId">
+            <img id="uploadImg" class="img-fluid" src="" alt="">
+        </div>
+        <input type="button" class="btn btn-primary" value="发布" v-on:click="addBlog">
+    </form>
+    <!-- Vue -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <!-- axios -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <!-- 发布博客操作 -->
+    <script>
+        var blogForm = new Vue({
+            el: "#blogForm",
+            data: {
+                title: "",
+                content: "",
+                img: "",
+                imgHead: "data:image/jpg;base64,"
+            },
+            methods: {
+                addBlog: function() {
+                    var that = this;
+                    var file = document.getElementById("fileId").files[0];
+                    var reader = new FileReader();
+                    reader.readAsDataURL(file);
+                    reader.onload = function(e) {
+                        document.getElementById("uploadImg").src = e.target.result;
+                        that.img = e.target.result;
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

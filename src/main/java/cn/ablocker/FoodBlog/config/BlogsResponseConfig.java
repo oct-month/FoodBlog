@@ -34,4 +34,24 @@ public class BlogsResponseConfig
         response.setSuccess(true);
         return response;
     }
+
+    @Bean
+    @Scope("prototype")
+    CommonResponse addBlogSuccessResponse()
+    {
+        CommonResponse response = new CommonResponse();
+        response.setStatus(201);
+        response.setSuccess(true);
+        return response;
+    }
+
+    @Bean
+    @Scope("prototype")
+    CommonResponse addBlogFailResponse()
+    {
+        CommonResponse response = new CommonResponse();
+        response.setStatus(400);
+        response.setSuccess(false);
+        return response;
+    }
 }
