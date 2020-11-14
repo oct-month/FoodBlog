@@ -54,4 +54,15 @@ public class LoginController
 		loginBussiness.offLine(sessionId);
 		return context.getBean("unLoginResponse", CommonResponse.class);
 	}
+
+	@GetMapping("/api/islogin")
+	public CommonResponse isLogin(HttpServletRequest request, HttpServletResponse response)
+	{
+		String sessionId = request.getSession().getId();
+		boolean flag = loginBussiness.isLogin(sessionId);
+		if (flag)
+			return context.getBean("loginSuccessResponse", CommonResponse.class);
+		else
+			return context.getBean("loginFailResponse", CommonResponse.class);
+	}
 }
