@@ -161,6 +161,26 @@
 			"response": []
 		},
 		{
+			"name": "登陆状态api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/islogin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"islogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "用户注销api",
 			"request": {
 				"method": "DELETE",
