@@ -1,9 +1,10 @@
 package cn.ablocker.FoodBlog.response;
 
-public class CommonResponse
+public class BaseResponse
 {
     private int status;         // 请求状态
-    private boolean success;    // 是否登陆成功
+    private boolean success;    // 是否成功
+    private String info;        // 提示信息
 
     public int getStatus()
     {
@@ -23,5 +24,15 @@ public class CommonResponse
     public void setSuccess(boolean success)
     {
         this.success = success;
+    }
+
+    public String getInfo()
+    {
+        return info;
+    }
+
+    public void setInfo(String info)
+    {
+        this.info = info;
     }
 }

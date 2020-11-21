@@ -18,6 +18,25 @@ public class MainController
 	@Autowired
 	private LoginBussiness loginBussiness;
 
+	// 登录页面
+	@GetMapping("/login")
+	public ModelAndView login()
+	{
+		ModelAndView view = new ModelAndView();
+		view.setViewName("login.html");
+		return view;
+	}
+
+	// 注册页面
+	@GetMapping("/register")
+	public ModelAndView register()
+	{
+		ModelAndView view = new ModelAndView();
+		view.setViewName("register.html");
+		return view;
+	}
+
+	// 主页面
 	@LoginNeeded
 	@GetMapping("/")
 	public ModelAndView index(HttpServletRequest request, HttpServletResponse response)
@@ -29,18 +48,20 @@ public class MainController
 		return view;
 	}
 
+	// 用户blog页面
 	@LoginNeeded
 	@GetMapping("/blog/{username}")
 	public ModelAndView userBlogs(@PathVariable("username") String userName, HttpServletRequest request, HttpServletResponse response)
 	{
 		ModelAndView view = new ModelAndView();
 		String sessionId = request.getSession().getId();
-		view.addObject("specialUser", userName);
-		view.addObject("userName", loginBussiness.getUserName(sessionId));
+		view.addObject("specialUser", userName);							// 对方的用户名
+		view.addObject("userName", loginBussiness.getUserName(sessionId));	// 自己的用户名
 		view.setViewName("userblog.html");
 		return view;
 	}
 
+	// 发布blog页面
 	@LoginNeeded
 	@GetMapping("/add/blog")
 	public ModelAndView addBlog(HttpServletRequest request, HttpServletResponse response)

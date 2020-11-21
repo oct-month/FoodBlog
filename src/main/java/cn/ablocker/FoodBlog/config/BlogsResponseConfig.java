@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Scope;
 
 import cn.ablocker.FoodBlog.entity.WebBlog;
 import cn.ablocker.FoodBlog.response.BlogsResponse;
-import cn.ablocker.FoodBlog.response.CommonResponse;
+import cn.ablocker.FoodBlog.response.BaseResponse;
 
 @Configuration
 public class BlogsResponseConfig
@@ -27,29 +27,31 @@ public class BlogsResponseConfig
     // 点赞成功的响应
     @Bean
     @Scope("prototype")
-    CommonResponse likesResponse()
+    BaseResponse likesResponse()
     {
-        CommonResponse response = new CommonResponse();
+        BaseResponse response = new BaseResponse();
         response.setStatus(201);
         response.setSuccess(true);
         return response;
     }
 
+    // 添加博客成功的响应
     @Bean
     @Scope("prototype")
-    CommonResponse addBlogSuccessResponse()
+    BaseResponse addBlogSuccessResponse()
     {
-        CommonResponse response = new CommonResponse();
+        BaseResponse response = new BaseResponse();
         response.setStatus(201);
         response.setSuccess(true);
         return response;
     }
 
+    // 添加博客失败的响应
     @Bean
     @Scope("prototype")
-    CommonResponse addBlogFailResponse()
+    BaseResponse addBlogFailResponse()
     {
-        CommonResponse response = new CommonResponse();
+        BaseResponse response = new BaseResponse();
         response.setStatus(400);
         response.setSuccess(false);
         return response;

@@ -103,35 +103,6 @@
 			"response": []
 		},
 		{
-			"name": "用户注册api",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"userName\": \"test2\",\n    \"passWord\": \"test\",\n    \"email\": \"test@qq.com\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8082/api/register",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"api",
-						"register"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "用户登陆api",
 			"request": {
 				"method": "POST",
@@ -146,7 +117,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/login",
+					"raw": "http://localhost:8082/api/login/dologin",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -154,19 +125,29 @@
 					"port": "8082",
 					"path": [
 						"api",
-						"login"
+						"login",
+						"dologin"
 					]
 				}
 			},
 			"response": []
 		},
 		{
-			"name": "登陆状态api",
+			"name": "用户注册api",
 			"request": {
-				"method": "GET",
+				"method": "POST",
 				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userName\": \"test2\",\n    \"passWord\": \"test\",\n    \"email\": \"test@qq.com\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://localhost:8082/api/islogin",
+					"raw": "http://localhost:8082/api/login/register",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -174,7 +155,8 @@
 					"port": "8082",
 					"path": [
 						"api",
-						"islogin"
+						"login",
+						"register"
 					]
 				}
 			},
@@ -186,7 +168,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/unlogin",
+					"raw": "http://localhost:8082/api/login/unlogin",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -194,7 +176,50 @@
 					"port": "8082",
 					"path": [
 						"api",
+						"login",
 						"unlogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "登陆状态api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/login/islogin",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"login",
+						"islogin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "用户名称api",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8082/api/login/username",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"login",
+						"username"
 					]
 				}
 			},
@@ -206,7 +231,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/blogs",
+					"raw": "http://localhost:8082/api/blog/blogs",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -214,6 +239,7 @@
 					"port": "8082",
 					"path": [
 						"api",
+						"blog",
 						"blogs"
 					]
 				}
@@ -226,7 +252,7 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "http://localhost:8082/api/blogs/test2",
+					"raw": "http://localhost:8082/api/blog/blogs/test2",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -234,6 +260,7 @@
 					"port": "8082",
 					"path": [
 						"api",
+						"blog",
 						"blogs",
 						"test2"
 					]
@@ -256,7 +283,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/add/blog",
+					"raw": "http://localhost:8082/api/blog/add/blog",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -264,6 +291,7 @@
 					"port": "8082",
 					"path": [
 						"api",
+						"blog",
 						"add",
 						"blog"
 					]
@@ -272,7 +300,7 @@
 			"response": []
 		},
 		{
-			"name": "点赞api",
+			"name": "博客点赞api",
 			"request": {
 				"method": "PUT",
 				"header": [],
@@ -286,7 +314,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/add/likes/1",
+					"raw": "http://localhost:8082/api/blog/add/likes/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -294,39 +322,10 @@
 					"port": "8082",
 					"path": [
 						"api",
+						"blog",
 						"add",
 						"likes",
 						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "增加评论api",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"content\": \"这个博客太tmd棒了\",\n    \"blogId\": \"1\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "http://localhost:8082/api/add/comment",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "8082",
-					"path": [
-						"api",
-						"add",
-						"comment"
 					]
 				}
 			},
@@ -350,7 +349,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8082/api/comment/1",
+					"raw": "http://localhost:8082/api/comment/comments/1",
 					"protocol": "http",
 					"host": [
 						"localhost"
@@ -359,7 +358,38 @@
 					"path": [
 						"api",
 						"comment",
+						"comments",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "增加评论api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"content\": \"这个博客太tmd棒了\",\n    \"blogId\": \"1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8082/api/comment/add",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8082",
+					"path": [
+						"api",
+						"comment",
+						"add"
 					]
 				}
 			},

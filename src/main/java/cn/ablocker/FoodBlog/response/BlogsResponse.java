@@ -4,20 +4,9 @@ import java.util.List;
 
 import cn.ablocker.FoodBlog.entity.WebBlog;
 
-public class BlogsResponse
+public class BlogsResponse extends BaseResponse
 {
-    private int status;             // 请求状态
     private List<WebBlog> blogs;    // 博客
-
-    public int getStatus()
-    {
-        return status;
-    }
-
-    public void setStatus(int status)
-    {
-        this.status = status;
-    }
 
     public List<WebBlog> getBlogs()
     {

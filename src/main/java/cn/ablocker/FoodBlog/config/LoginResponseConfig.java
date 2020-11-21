@@ -4,7 +4,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Scope;
 
-import cn.ablocker.FoodBlog.response.CommonResponse;
+import cn.ablocker.FoodBlog.response.BaseResponse;
 
 @Configuration
 public class LoginResponseConfig
@@ -12,9 +12,9 @@ public class LoginResponseConfig
     // 登录成功的响应
     @Bean
     @Scope("prototype")
-    public CommonResponse loginSuccessResponse()
+    public BaseResponse loginSuccessResponse()
     {
-        CommonResponse response = new CommonResponse();
+        BaseResponse response = new BaseResponse();
         response.setStatus(201);
         response.setSuccess(true);
         return response;
@@ -23,9 +23,9 @@ public class LoginResponseConfig
     // 登陆失败的响应
     @Bean
     @Scope("prototype")
-    public CommonResponse loginFailResponse()
+    public BaseResponse loginFailResponse()
     {
-        CommonResponse response = new CommonResponse();
+        BaseResponse response = new BaseResponse();
         response.setStatus(403);
         response.setSuccess(false);
         return response;
@@ -34,11 +34,22 @@ public class LoginResponseConfig
     // 注销的响应
     @Bean
     @Scope("prototype")
-    public CommonResponse unLoginResponse()
+    public BaseResponse unLoginResponse()
     {
-        CommonResponse response = new CommonResponse();
+        BaseResponse response = new BaseResponse();
         response.setStatus(200);
         response.setSuccess(true);
+        return response;
+    }
+
+    @Bean
+    @Scope("prototype")
+    public BaseResponse loginNeededResponse()
+    {
+        BaseResponse response = new BaseResponse();
+        response.setStatus(401);
+        response.setSuccess(false);
+        response.setInfo("You should login first.");
         return response;
     }
 }

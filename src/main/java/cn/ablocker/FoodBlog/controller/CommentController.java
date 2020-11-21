@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import cn.ablocker.FoodBlog.annotation.LoginNeeded;
@@ -19,7 +20,8 @@ import cn.ablocker.FoodBlog.bussiness.CommentBussiness;
 import cn.ablocker.FoodBlog.entity.Comment;
 import cn.ablocker.FoodBlog.response.CommentResponse;
 
-@RestController
+@RestController()
+@RequestMapping("/api/comment")
 public class CommentController
 {
     @Autowired
@@ -29,15 +31,17 @@ public class CommentController
 
     private static final String COMMENTS_RESPONSE_BEAN = "commentsResponse";
 
+    // 返回blog的所有评论
     @LoginNeeded
-    @GetMapping("/api/comment/{blogId}")
+    @GetMapping("/comments/{blogId}")
     public CommentResponse getBlogComments(@PathVariable("blogId") int blogId, HttpServletRequest request, HttpServletResponse response)
     {
         return (CommentResponse) context.getBean(COMMENTS_RESPONSE_BEAN, new Object[] {commentBussiness.getComments(blogId)});
     }
 
+    // 增加blog的评论
     @LoginNeeded
-    @PostMapping(value = "/api/add/comment", produces = "application/json")
+    @PostMapping(value = "/add", produces = "application/json")
     public CommentResponse addBlogComment(@RequestBody Comment comment, HttpServletRequest request, HttpServletResponse response)
     {
         comment = commentBussiness.addComment(comment.getBlogId(), comment.getContent());

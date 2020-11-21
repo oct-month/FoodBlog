@@ -230,7 +230,7 @@
 					var that = this
 					axios({
 						method: "GET",
-						url: "/api/blogs"
+						url: "/api/blog/blogs"
 					})
 					.then(function(response) {
 						var data = response.data;
@@ -244,7 +244,7 @@
 						that.blogs.forEach(blog => {
 							axios({
 								method: "GET",
-								url: "/api/comment/" + blog.id
+								url: "/api/comment/comments/" + blog.id
 							})
 							.then(function(response) {
 								Vue.set(blog, "comments", response.data.comments);
@@ -263,7 +263,7 @@
 					var that = this
 					axios({
 						method: "PUT",
-						url: "/api/add/likes/" + blogId
+						url: "/api/blog/add/likes/" + blogId
 					})
 					.then(function(response) {
 						that.blogs[i].likes ++;
@@ -279,7 +279,7 @@
 						var that = this;
 						axios({
 							method: "POST",
-							url: "/api/add/comment",
+							url: "/api/comment/add",
 							data: {
 								"content": that.newComments[i],
 								"blogId": blogId

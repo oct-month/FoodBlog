@@ -12,6 +12,7 @@ import cn.ablocker.FoodBlog.response.CommentResponse;
 @Configuration
 public class CommentResponseConfig
 {
+    // 查询评论的响应
     @Bean
     @Scope("prototype")
     public CommentResponse commentsResponse(List<Comment> comments)
