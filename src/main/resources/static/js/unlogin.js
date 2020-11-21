@@ -2,7 +2,7 @@ function unLogin()
 {
     axios({
         method: "DELETE",
-        url: "/api/unlogin"
+        url: "/api/login/unlogin"
     })
     .then(function (response) {
         window.location = "/login";
