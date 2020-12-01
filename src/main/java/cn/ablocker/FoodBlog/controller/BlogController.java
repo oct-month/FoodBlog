@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,6 +23,7 @@ import cn.ablocker.FoodBlog.entity.WebBlog;
 import cn.ablocker.FoodBlog.response.BlogsResponse;
 import cn.ablocker.FoodBlog.response.BaseResponse;
 
+@CrossOrigin
 @RestController()
 @RequestMapping("/api/blog")
 public class BlogController
