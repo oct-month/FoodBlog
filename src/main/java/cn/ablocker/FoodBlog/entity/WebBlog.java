@@ -1,5 +1,6 @@
 package cn.ablocker.FoodBlog.entity;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -86,6 +87,8 @@ public class WebBlog
 
     public List<Comment> getComments()
     {
+        if (this.comments == null)
+            this.comments = new ArrayList<Comment>();
         return comments;
     }
 
