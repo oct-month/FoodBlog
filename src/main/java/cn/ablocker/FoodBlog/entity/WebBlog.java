@@ -1,6 +1,7 @@
 package cn.ablocker.FoodBlog.entity;
 
 import java.util.Date;
+import java.util.List;
 
 public class WebBlog
 {
@@ -11,6 +12,7 @@ public class WebBlog
     private String img;             // 图片
     private int likes;              // 点赞数
     private String userName;        // 用户名（关联属性）
+    private List<Comment> comments; // 评论（关联属性）
 
     public int getId()
     {
@@ -80,5 +82,15 @@ public class WebBlog
     public void setUserName(String userName)
     {
         this.userName = userName;
+    }
+
+    public List<Comment> getComments()
+    {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments)
+    {
+        this.comments = comments;
     }
 }
