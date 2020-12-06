@@ -20,6 +20,7 @@ public class BlogsResponseConfig
     {
         BlogsResponse response = new BlogsResponse();
         response.setStatus(200);
+        response.setSuccess(true);
         response.setBlogs(blogs);
         return response;
     }

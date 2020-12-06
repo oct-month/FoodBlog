@@ -16,6 +16,7 @@ public class UserNameResponseConfig
     {
         UserNameResponse response = new UserNameResponse();
         response.setStatus(200);
+        response.setSuccess(true);
         response.setUserName(userName);
         return response;
     }

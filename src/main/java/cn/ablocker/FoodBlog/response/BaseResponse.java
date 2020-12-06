@@ -6,6 +6,13 @@ public class BaseResponse
     private boolean success;    // 是否成功
     private String info;        // 提示信息
 
+    public BaseResponse()
+    {
+        this.status = 200;
+        this.success = true;
+        this.info = "";
+    }
+
     public int getStatus()
     {
         return status;

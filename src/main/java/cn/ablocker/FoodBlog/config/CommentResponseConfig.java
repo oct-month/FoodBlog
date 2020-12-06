@@ -19,6 +19,7 @@ public class CommentResponseConfig
     {
         CommentResponse response = new CommentResponse();
         response.setStatus(200);
+        response.setSuccess(true);
         response.setComments(comments);
         return response;
     }
