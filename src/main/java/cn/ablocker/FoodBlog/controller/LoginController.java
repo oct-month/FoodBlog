@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,7 +19,7 @@ import cn.ablocker.FoodBlog.entity.BlogUser;
 import cn.ablocker.FoodBlog.response.BaseResponse;
 import cn.ablocker.FoodBlog.response.UserNameResponse;
 
-@CrossOrigin
+// @CrossOrigin
 @RestController
 @RequestMapping("/api/login")
 public class LoginController
